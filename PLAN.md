@@ -85,7 +85,7 @@ Skeleton kosong — tidak ada kode untuk di-reuse selain `App\Models\User` dan T
 - [x] 1. `git init` + commit awal skeleton; install Laravel Boost (`composer require laravel/boost --dev && php artisan boost:install`), baca ulang AGENTS.md
 - [x] 2. Konfig: `.env` MySQL (lerd), `APP_LOCALE=id`, `APP_TIMEZONE=Asia/Jakarta`, `php artisan storage:link`
 - [x] 3. Install Filament 5 + panel `admin`; install semua paket spatie + publish migrations/config; Shield setup
-- [ ] 4. Enums + migrations + models (+ factories) untuk semua modul, `LogsActivity`, `HasTags` di Post
+- [x] 4. Enums + migrations + models (+ factories) untuk semua modul, `LogsActivity`, `HasTags` di Post
 - [ ] 5. `GeneralSettings` + settings migration + `ManageGeneralSettings` page
 - [ ] 6. Resources Konten: Category, Post (tags plugin `SpatieTagsInput`/`SpatieTagsColumn`), Page, Slide, Album(+foto)
 - [ ] 7. StaffResource
