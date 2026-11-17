@@ -82,8 +82,8 @@ Seeder super admin dari env (`ADMIN_EMAIL`/`ADMIN_PASSWORD`) atau `shield:super-
 Skeleton kosong — tidak ada kode untuk di-reuse selain `App\Models\User` dan Tailwind/Vite config. Andalkan generator: `make:filament-resource --generate`, `make:filament-settings-page`, `shield:*`, `vendor:publish` migrations spatie.
 
 ## Steps
-- [ ] 1. `git init` + commit awal skeleton; install Laravel Boost (`composer require laravel/boost --dev && php artisan boost:install`), baca ulang AGENTS.md
-- [ ] 2. Konfig: `.env` MySQL (lerd), `APP_LOCALE=id`, `APP_TIMEZONE=Asia/Jakarta`, `php artisan storage:link`
+- [x] 1. `git init` + commit awal skeleton; install Laravel Boost (`composer require laravel/boost --dev && php artisan boost:install`), baca ulang AGENTS.md
+- [x] 2. Konfig: `.env` MySQL (lerd), `APP_LOCALE=id`, `APP_TIMEZONE=Asia/Jakarta`, `php artisan storage:link`
 - [ ] 3. Install Filament 5 + panel `admin`; install semua paket spatie + publish migrations/config; Shield setup
 - [ ] 4. Enums + migrations + models (+ factories) untuk semua modul, `LogsActivity`, `HasTags` di Post
 - [ ] 5. `GeneralSettings` + settings migration + `ManageGeneralSettings` page
