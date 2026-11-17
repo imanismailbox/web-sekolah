@@ -2,11 +2,10 @@
 
 namespace App\Filament\Resources\PkkmYears\Tables;
 
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
-use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
 
 class PkkmYearsTable
@@ -14,35 +13,28 @@ class PkkmYearsTable
     public static function configure(Table $table): Table
     {
         return $table
+            ->defaultSort('year', 'desc')
             ->columns([
                 TextColumn::make('year')
-                    ->numeric()
+                    ->label('Tahun')
                     ->sortable(),
                 TextColumn::make('title')
+                    ->label('Judul')
                     ->searchable(),
-                TextColumn::make('slug')
-                    ->searchable(),
-                IconColumn::make('is_published')
-                    ->boolean(),
-                TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('components_count')
+                    ->label('Komponen')
+                    ->counts('components'),
+                ToggleColumn::make('is_published')
+                    ->label('Tampil'),
                 TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-            ])
-            ->filters([
-                //
+                    ->label('Diperbarui')
+                    ->since()
+                    ->sortable(),
             ])
             ->recordActions([
-                EditAction::make(),
-            ])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
+                EditAction::make()
+                    ->label('Kelola'),
+                DeleteAction::make(),
             ]);
     }
 }

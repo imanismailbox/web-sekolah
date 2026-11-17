@@ -5,6 +5,7 @@ namespace App\Filament\Resources\PkkmYears;
 use App\Filament\Resources\PkkmYears\Pages\CreatePkkmYear;
 use App\Filament\Resources\PkkmYears\Pages\EditPkkmYear;
 use App\Filament\Resources\PkkmYears\Pages\ListPkkmYears;
+use App\Filament\Resources\PkkmYears\RelationManagers\ComponentsRelationManager;
 use App\Filament\Resources\PkkmYears\Schemas\PkkmYearForm;
 use App\Filament\Resources\PkkmYears\Tables\PkkmYearsTable;
 use App\Models\PkkmYear;
@@ -44,7 +45,7 @@ class PkkmYearResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            ComponentsRelationManager::class,
         ];
     }
 

@@ -88,7 +88,7 @@ Skeleton kosong — tidak ada kode untuk di-reuse selain `App\Models\User` dan T
 - [x] 4. Enums + migrations + models (+ factories) untuk semua modul, `LogsActivity`, `HasTags` di Post
 - [x] 5. `GeneralSettings` + settings migration + `ManageGeneralSettings` page
 - [x] 6. Resources Konten: Category, Post (tags plugin `SpatieTagsInput`/`SpatieTagsColumn`), Page, Slide, Album(+foto)
-- [ ] 7. StaffResource
+- [x] 7. StaffResource
 - [ ] 8. PKKM: models, `PkkmYearResource` dengan struktur bertingkat + bukti link/file, action Duplikat + `DuplicatePkkmYear`; seeder template instrumen PKKM (komponen A–C dari contoh) opsional
 - [ ] 9. MenuItemResource + `MenuItem::url()` resolver
 - [ ] 10. UserResource + ActivityResource (read-only)
