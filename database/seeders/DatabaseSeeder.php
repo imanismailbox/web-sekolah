@@ -3,23 +3,24 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
     /**
      * Seed the application's database.
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $this->call(RolePermissionSeeder::class);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        $superAdmin = User::query()->firstOrCreate(
+            ['email' => 'admin@madrasah.test'],
+            ['name' => 'Super Admin', 'password' => 'password'],
+        );
+
+        $superAdmin->assignRole(config('filament-shield.super_admin.name'));
+
+        $this->call(PkkmTemplateSeeder::class);
     }
 }
