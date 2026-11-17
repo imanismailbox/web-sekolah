@@ -90,7 +90,7 @@ Skeleton kosong — tidak ada kode untuk di-reuse selain `App\Models\User` dan T
 - [x] 6. Resources Konten: Category, Post (tags plugin `SpatieTagsInput`/`SpatieTagsColumn`), Page, Slide, Album(+foto)
 - [x] 7. StaffResource
 - [x] 8. PKKM: models, `PkkmYearResource` dengan struktur bertingkat + bukti link/file, action Duplikat + `DuplicatePkkmYear`; seeder template instrumen PKKM (komponen A–C dari contoh) opsional
-- [ ] 9. MenuItemResource + `MenuItem::url()` resolver
+- [x] 9. MenuItemResource + `MenuItem::url()` resolver
 - [ ] 10. UserResource + ActivityResource (read-only)
 - [ ] 11. Shield generate permissions/policies + `RolePermissionSeeder` (4 role) + super admin seeder
 - [ ] 12. Tests feature (PHPUnit + Livewire): render list/create tiap resource, akses per role, duplikat PKKM, resolver URL menu, activity log tercatat

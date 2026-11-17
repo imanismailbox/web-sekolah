@@ -2,10 +2,10 @@
 
 namespace App\Filament\Resources\Users\Tables;
 
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 
 class UsersTable
@@ -15,32 +15,29 @@ class UsersTable
         return $table
             ->columns([
                 TextColumn::make('name')
-                    ->searchable(),
-                TextColumn::make('email')
-                    ->label('Email address')
-                    ->searchable(),
-                TextColumn::make('email_verified_at')
-                    ->dateTime()
+                    ->label('Nama')
+                    ->searchable()
                     ->sortable(),
+                TextColumn::make('email')
+                    ->label('Email')
+                    ->searchable(),
+                TextColumn::make('roles.name')
+                    ->label('Peran')
+                    ->badge(),
                 TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->label('Dibuat')
+                    ->dateTime('d M Y')
+                    ->sortable(),
             ])
             ->filters([
-                //
+                SelectFilter::make('roles')
+                    ->label('Peran')
+                    ->relationship('roles', 'name'),
             ])
             ->recordActions([
                 EditAction::make(),
-            ])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
+                DeleteAction::make()
+                    ->hidden(fn ($record): bool => $record->is(auth()->user())),
             ]);
     }
 }
