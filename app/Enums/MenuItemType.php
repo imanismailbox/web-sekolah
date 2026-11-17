@@ -47,6 +47,24 @@ enum MenuItemType: string implements HasLabel
     }
 
     /**
+     * Options (id => title) of the records selectable as target for this type.
+     *
+     * @return array<int, string>
+     */
+    public function targetOptions(): array
+    {
+        $model = $this->targetModel();
+
+        if ($model === null) {
+            return [];
+        }
+
+        $titleColumn = $this === self::Category ? 'name' : 'title';
+
+        return $model::query()->orderBy($titleColumn)->pluck($titleColumn, 'id')->all();
+    }
+
+    /**
      * Named route (public site) used to build the URL from the target's slug.
      */
     public function targetRouteName(): ?string

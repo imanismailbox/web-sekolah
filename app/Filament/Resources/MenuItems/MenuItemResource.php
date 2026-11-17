@@ -2,23 +2,18 @@
 
 namespace App\Filament\Resources\MenuItems;
 
-use App\Enums\MenuItemType;
-use App\Filament\Resources\MenuItems\Pages\ManageMenuItems;
+use App\Filament\Resources\MenuItems\Pages\EditMenuItem;
+use App\Filament\Resources\MenuItems\Pages\ListMenuItems;
+use App\Filament\Resources\MenuItems\RelationManagers\ChildrenRelationManager;
+use App\Filament\Resources\MenuItems\Schemas\MenuItemForm;
+use App\Filament\Resources\MenuItems\Tables\MenuItemsTable;
 use App\Models\MenuItem;
 use BackedEnum;
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteAction;
-use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\EditAction;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Toggle;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
-use Filament\Tables\Columns\IconColumn;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 use UnitEnum;
 
 class MenuItemResource extends Resource
@@ -39,85 +34,27 @@ class MenuItemResource extends Resource
 
     public static function form(Schema $schema): Schema
     {
-        return $schema
-            ->components([
-                Select::make('parent_id')
-                    ->relationship('parent', 'id'),
-                TextInput::make('label')
-                    ->required(),
-                Select::make('type')
-                    ->options(MenuItemType::class)
-                    ->default('url')
-                    ->required(),
-                TextInput::make('target_id')
-                    ->numeric(),
-                TextInput::make('url')
-                    ->url(),
-                TextInput::make('route_name'),
-                Toggle::make('open_in_new_tab')
-                    ->required(),
-                TextInput::make('sort')
-                    ->required()
-                    ->numeric()
-                    ->default(0),
-                Toggle::make('is_active')
-                    ->required(),
-            ]);
+        return MenuItemForm::configure($schema);
     }
 
     public static function table(Table $table): Table
     {
-        return $table
-            ->recordTitleAttribute('label')
-            ->columns([
-                TextColumn::make('parent.id')
-                    ->searchable(),
-                TextColumn::make('label')
-                    ->searchable(),
-                TextColumn::make('type')
-                    ->badge()
-                    ->searchable(),
-                TextColumn::make('target_id')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('url')
-                    ->searchable(),
-                TextColumn::make('route_name')
-                    ->searchable(),
-                IconColumn::make('open_in_new_tab')
-                    ->boolean(),
-                TextColumn::make('sort')
-                    ->numeric()
-                    ->sortable(),
-                IconColumn::make('is_active')
-                    ->boolean(),
-                TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-            ])
-            ->filters([
-                //
-            ])
-            ->recordActions([
-                EditAction::make(),
-                DeleteAction::make(),
-            ])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
-            ]);
+        return MenuItemsTable::configure($table)
+            ->modifyQueryUsing(fn (Builder $query): Builder => $query->whereNull('parent_id'));
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            ChildrenRelationManager::class,
+        ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => ManageMenuItems::route('/'),
+            'index' => ListMenuItems::route('/'),
+            'edit' => EditMenuItem::route('/{record}/edit'),
         ];
     }
 }
