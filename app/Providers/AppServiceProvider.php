@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\View\Composers\PublicLayoutComposer;
 use BezhanSalleh\FilamentShield\Facades\FilamentShield;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -21,5 +23,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         FilamentShield::enforcePolicies();
+
+        View::composer('components.public-layout', PublicLayoutComposer::class);
     }
 }

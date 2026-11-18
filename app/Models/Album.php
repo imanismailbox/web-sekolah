@@ -5,6 +5,8 @@ namespace App\Models;
 use App\Models\Concerns\LogsModelActivity;
 use Database\Factories\AlbumFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\Scope;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -32,5 +34,14 @@ class Album extends Model
     public function photos(): HasMany
     {
         return $this->hasMany(AlbumPhoto::class)->orderBy('sort');
+    }
+
+    /**
+     * @param  Builder<self>  $query
+     */
+    #[Scope]
+    protected function published(Builder $query): void
+    {
+        $query->where('is_published', true);
     }
 }

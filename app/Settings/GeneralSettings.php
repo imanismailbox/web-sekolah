@@ -44,4 +44,18 @@ class GeneralSettings extends Settings
     {
         return 'general';
     }
+
+    /**
+     * Nomor WhatsApp dalam format internasional untuk tautan wa.me (0812... menjadi 62812...).
+     */
+    public function whatsappNumber(): ?string
+    {
+        $number = preg_replace('/\D+/', '', (string) $this->whatsapp);
+
+        if ($number === '') {
+            return null;
+        }
+
+        return str_starts_with($number, '0') ? '62'.substr($number, 1) : $number;
+    }
 }
