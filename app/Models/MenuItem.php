@@ -72,6 +72,10 @@ class MenuItem extends Model
             ? $this->route_name
             : $this->type->targetRouteName();
 
+        if ($this->type === MenuItemType::None) {
+            return '#';
+        }
+
         if ($this->type === MenuItemType::Url) {
             return $this->url ?: '#';
         }

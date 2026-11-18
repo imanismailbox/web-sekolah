@@ -21,7 +21,7 @@ class StaffResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUserGroup;
 
-    protected static string|UnitEnum|null $navigationGroup = 'Profil';
+    protected static string|UnitEnum|null $navigationGroup = 'Data Madrasah';
 
     protected static ?string $modelLabel = 'Guru/Pegawai';
 

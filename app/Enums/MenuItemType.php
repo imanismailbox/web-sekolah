@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 
 enum MenuItemType: string implements HasLabel
 {
+    case None = 'none';
     case Url = 'url';
     case Route = 'route';
     case Page = 'page';
@@ -21,6 +22,7 @@ enum MenuItemType: string implements HasLabel
     public function getLabel(): string
     {
         return match ($this) {
+            self::None => 'Tanpa Tautan (Induk Dropdown)',
             self::Url => 'Tautan Kustom',
             self::Route => 'Halaman Bawaan',
             self::Page => 'Halaman',
@@ -91,6 +93,7 @@ enum MenuItemType: string implements HasLabel
             'albums.index' => 'Galeri',
             'staff.index' => 'Guru & Pegawai',
             'pkkm.index' => 'PKKM',
+            'contact' => 'Kontak',
         ];
     }
 }

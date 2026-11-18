@@ -22,5 +22,9 @@ class DatabaseSeeder extends Seeder
         $superAdmin->assignRole(config('filament-shield.super_admin.name'));
 
         $this->call(PkkmTemplateSeeder::class);
+
+        if (app()->environment('local')) {
+            $this->call(FullDemoSeeder::class);
+        }
     }
 }

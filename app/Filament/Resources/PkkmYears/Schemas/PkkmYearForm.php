@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\PkkmYears\Schemas;
 
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -54,6 +55,11 @@ class PkkmYearForm
                         Textarea::make('description')
                             ->label('Keterangan')
                             ->rows(3)
+                            ->columnSpanFull(),
+                        RichEditor::make('content')
+                            ->label('Isi Halaman')
+                            ->fileAttachmentsDisk('public')
+                            ->fileAttachmentsDirectory('pkkm/attachments')
                             ->columnSpanFull(),
                     ]),
             ]);

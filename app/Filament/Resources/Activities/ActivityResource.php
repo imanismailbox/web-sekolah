@@ -29,7 +29,7 @@ class ActivityResource extends Resource
 
     protected static ?string $slug = 'activity-logs';
 
-    protected static ?int $navigationSort = 3;
+    protected static ?int $navigationSort = 4;
 
     public static function canCreate(): bool
     {

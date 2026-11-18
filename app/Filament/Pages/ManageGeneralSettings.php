@@ -25,13 +25,13 @@ class ManageGeneralSettings extends SettingsPage
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCog6Tooth;
 
-    protected static string|UnitEnum|null $navigationGroup = 'Tampilan';
+    protected static string|UnitEnum|null $navigationGroup = 'Sistem';
 
     protected static ?string $navigationLabel = 'Pengaturan';
 
     protected static ?string $title = 'Pengaturan Situs';
 
-    protected static ?int $navigationSort = 2;
+    protected static ?int $navigationSort = 1;
 
     public function form(Schema $schema): Schema
     {

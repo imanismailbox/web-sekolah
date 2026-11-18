@@ -42,6 +42,7 @@ class MenuItemForm
                     ->label('Jenis Tautan')
                     ->options(MenuItemType::class)
                     ->default(MenuItemType::Url)
+                    ->helperText('Pilih "Tanpa Tautan" untuk induk yang hanya membuka dropdown sub-menu.')
                     ->required()
                     ->live()
                     ->afterStateUpdated(function (Set $set): void {
