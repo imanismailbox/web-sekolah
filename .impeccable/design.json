@@ -1,0 +1,561 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-18T09:15:02Z",
+  "title": "Design System: Website Resmi Madrasah Aliyah",
+  "extensions": {
+    "colorMeta": {
+      "brand-600": {
+        "role": "primary",
+        "displayName": "Hijau Kemenag",
+        "canonical": "#00843d",
+        "tonalRamp": [
+          "#032a15",
+          "#063f20",
+          "#055629",
+          "#006b32",
+          "#00843d",
+          "#33a463",
+          "#a9d9b9",
+          "#eef7f1"
+        ]
+      },
+      "brand-700": {
+        "role": "primary",
+        "displayName": "Hijau Daun Tua",
+        "canonical": "#006b32",
+        "tonalRamp": [
+          "#032a15",
+          "#063f20",
+          "#055629",
+          "#006b32",
+          "#00843d",
+          "#33a463",
+          "#a9d9b9",
+          "#eef7f1"
+        ]
+      },
+      "brand-800": {
+        "role": "primary",
+        "displayName": "Hijau Header",
+        "canonical": "#055629",
+        "tonalRamp": [
+          "#032a15",
+          "#063f20",
+          "#055629",
+          "#006b32",
+          "#00843d",
+          "#33a463",
+          "#a9d9b9",
+          "#eef7f1"
+        ]
+      },
+      "brand-900": {
+        "role": "primary",
+        "displayName": "Hijau Hutan",
+        "canonical": "#063f20",
+        "tonalRamp": [
+          "#032a15",
+          "#063f20",
+          "#055629",
+          "#006b32",
+          "#00843d",
+          "#33a463",
+          "#a9d9b9",
+          "#eef7f1"
+        ]
+      },
+      "brand-950": {
+        "role": "primary",
+        "displayName": "Hijau Malam",
+        "canonical": "#032a15",
+        "tonalRamp": [
+          "#032a15",
+          "#063f20",
+          "#055629",
+          "#006b32",
+          "#00843d",
+          "#33a463",
+          "#a9d9b9",
+          "#eef7f1"
+        ]
+      },
+      "brand-500": {
+        "role": "primary",
+        "displayName": "Hijau Sedang",
+        "canonical": "#0b9149",
+        "tonalRamp": [
+          "#032a15",
+          "#063f20",
+          "#055629",
+          "#006b32",
+          "#0b9149",
+          "#33a463",
+          "#6fbf8c",
+          "#d7eedf"
+        ]
+      },
+      "brand-400": {
+        "role": "primary",
+        "displayName": "Hijau Sedang Terang",
+        "canonical": "#33a463",
+        "tonalRamp": [
+          "#032a15",
+          "#063f20",
+          "#055629",
+          "#006b32",
+          "#00843d",
+          "#33a463",
+          "#a9d9b9",
+          "#eef7f1"
+        ]
+      },
+      "brand-300": {
+        "role": "primary",
+        "displayName": "Hijau Pucuk",
+        "canonical": "#6fbf8c",
+        "tonalRamp": [
+          "#032a15",
+          "#063f20",
+          "#055629",
+          "#006b32",
+          "#00843d",
+          "#6fbf8c",
+          "#a9d9b9",
+          "#eef7f1"
+        ]
+      },
+      "brand-200": {
+        "role": "primary",
+        "displayName": "Hijau Embun Pekat",
+        "canonical": "#a9d9b9",
+        "tonalRamp": [
+          "#032a15",
+          "#063f20",
+          "#055629",
+          "#006b32",
+          "#00843d",
+          "#6fbf8c",
+          "#a9d9b9",
+          "#eef7f1"
+        ]
+      },
+      "brand-100": {
+        "role": "primary",
+        "displayName": "Hijau Embun",
+        "canonical": "#d7eedf",
+        "tonalRamp": [
+          "#032a15",
+          "#063f20",
+          "#055629",
+          "#006b32",
+          "#00843d",
+          "#6fbf8c",
+          "#d7eedf",
+          "#eef7f1"
+        ]
+      },
+      "brand-50": {
+        "role": "primary",
+        "displayName": "Hijau Embun Tipis",
+        "canonical": "#eef7f1",
+        "tonalRamp": [
+          "#032a15",
+          "#063f20",
+          "#055629",
+          "#006b32",
+          "#00843d",
+          "#6fbf8c",
+          "#d7eedf",
+          "#eef7f1"
+        ]
+      },
+      "gold-400": {
+        "role": "secondary",
+        "displayName": "Emas Kemenag",
+        "canonical": "#efc33a",
+        "tonalRamp": [
+          "#3d2e05",
+          "#6b5008",
+          "#9a730c",
+          "#d9a514",
+          "#efc33a",
+          "#f6d76b",
+          "#fae9a8",
+          "#fdf7de"
+        ]
+      },
+      "gold-300": {
+        "role": "secondary",
+        "displayName": "Emas Muda",
+        "canonical": "#f6d76b",
+        "tonalRamp": [
+          "#3d2e05",
+          "#6b5008",
+          "#9a730c",
+          "#d9a514",
+          "#efc33a",
+          "#f6d76b",
+          "#fae9a8",
+          "#fdf7de"
+        ]
+      },
+      "gold-500": {
+        "role": "secondary",
+        "displayName": "Emas Tua",
+        "canonical": "#d9a514",
+        "tonalRamp": [
+          "#3d2e05",
+          "#6b5008",
+          "#9a730c",
+          "#d9a514",
+          "#efc33a",
+          "#f6d76b",
+          "#fae9a8",
+          "#fdf7de"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Tinta",
+        "canonical": "#15231b",
+        "tonalRamp": [
+          "#15231b",
+          "#2a3a31",
+          "#3f4f46",
+          "#55635b",
+          "#7b8781",
+          "#a6b0aa",
+          "#dfe7e2",
+          "#f6f8f6"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Abu Lumut",
+        "canonical": "#55635b",
+        "tonalRamp": [
+          "#15231b",
+          "#2a3a31",
+          "#3f4f46",
+          "#55635b",
+          "#7b8781",
+          "#a6b0aa",
+          "#dfe7e2",
+          "#f6f8f6"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Garis",
+        "canonical": "#dfe7e2",
+        "tonalRamp": [
+          "#15231b",
+          "#2a3a31",
+          "#3f4f46",
+          "#55635b",
+          "#7b8781",
+          "#a6b0aa",
+          "#dfe7e2",
+          "#f6f8f6"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Kertas",
+        "canonical": "#f6f8f6",
+        "tonalRamp": [
+          "#15231b",
+          "#2a3a31",
+          "#3f4f46",
+          "#55635b",
+          "#7b8781",
+          "#a6b0aa",
+          "#dfe7e2",
+          "#f6f8f6"
+        ]
+      },
+      "white": {
+        "role": "neutral",
+        "displayName": "Putih Kartu",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "#15231b",
+          "#2a3a31",
+          "#3f4f46",
+          "#55635b",
+          "#7b8781",
+          "#dfe7e2",
+          "#f6f8f6",
+          "#ffffff"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Nama madrasah di panel beranda tanpa slide; responsif 2.25rem → 3rem → 3.75rem."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Judul bagian beranda, brand-900; responsif 1.875rem → 2.25rem."
+      },
+      "page-title": {
+        "displayName": "Page Title",
+        "purpose": "h1 page header halaman isi, putih di atas brand-700; responsif 1.875rem → 2.5rem."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Judul kartu berita, nama guru, judul tautan cepat."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Teks umum dan lead bagian (muted)."
+      },
+      "prose": {
+        "displayName": "Prose",
+        "purpose": "Isi rich text dari editor admin, maks 70ch."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Teks tombol, link arrow, judul kolom footer."
+      },
+      "meta": {
+        "displayName": "Meta",
+        "purpose": "Tanggal, jumlah foto, keterangan kecil, chip."
+      }
+    },
+    "shadows": [
+      {
+        "name": "card-rest",
+        "value": "0 1px 2px rgb(6 63 32 / 0.06), 0 8px 24px -12px rgb(6 63 32 / 0.18)",
+        "purpose": "Kartu, daftar berita ringkas, tautan cepat."
+      },
+      {
+        "name": "card-hover",
+        "value": "0 1px 2px rgb(6 63 32 / 0.06), 0 18px 36px -16px rgb(6 63 32 / 0.32)",
+        "purpose": "Kartu berita saat hover."
+      },
+      {
+        "name": "panel",
+        "value": "0 1px 2px rgb(6 63 32 / 0.06), 0 16px 40px -20px rgb(6 63 32 / 0.3)",
+        "purpose": "Panel kontak beranda."
+      },
+      {
+        "name": "header",
+        "value": "0 6px 20px -10px rgb(3 42 21 / 0.6)",
+        "purpose": "Bayangan di bawah header sticky."
+      },
+      {
+        "name": "dropdown",
+        "value": "0 18px 40px -16px rgb(3 42 21 / 0.45)",
+        "purpose": "Submenu navigasi."
+      },
+      {
+        "name": "card-on-green",
+        "value": "0 24px 60px -24px rgb(0 0 0 / 0.5)",
+        "purpose": "Kartu PKKM putih di band hijau."
+      }
+    ],
+    "motion": [
+      {
+        "name": "color-transition",
+        "value": "200ms ease (transition-colors)",
+        "purpose": "Hover tombol, item navigasi, ubin ikon."
+      },
+      {
+        "name": "image-zoom",
+        "value": "500ms, scale 1.04–1.05",
+        "purpose": "Zoom gambar kartu berita dan galeri saat hover; berita utama 700ms scale 1.03."
+      },
+      {
+        "name": "lift",
+        "value": "200ms, translateY(-2px)",
+        "purpose": "Tautan cepat naik saat hover."
+      },
+      {
+        "name": "marquee",
+        "value": "40s linear infinite",
+        "purpose": "Running text topbar; berhenti saat hover/fokus, mati saat reduced motion."
+      },
+      {
+        "name": "slider-autoplay",
+        "value": "6000ms interval, scroll-snap smooth",
+        "purpose": "Banner beranda; berhenti saat hover/fokus, mati saat reduced motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      },
+      {
+        "name": "xl",
+        "value": "1280px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Tombol Utama",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Aksi utama di atas kertas atau putih.",
+      "html": "<a class=\"ds-btn ds-btn-primary\" href=\"#\"><svg viewBox=\"0 0 24 24\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M7.9 20A9 9 0 1 0 4 16.1L2 22Z\"/></svg>Chat WhatsApp</a>",
+      "css": ".ds-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: 9999px; padding: 10px 20px; font-family: Poppins, Inter, ui-sans-serif, system-ui, sans-serif; font-size: 0.875rem; font-weight: 600; line-height: 1.25rem; text-decoration: none; border: 1px solid transparent; transition: background-color 200ms, color 200ms; } .ds-btn:focus-visible { outline: 2px solid #efc33a; outline-offset: 2px; } .ds-btn-primary { background: #00843d; color: #fff; } .ds-btn-primary:hover { background: #006b32; }"
+    },
+    {
+      "name": "Tombol Emas",
+      "kind": "button",
+      "refersTo": "button-gold",
+      "description": "CTA utama di atas bidang hijau atau foto.",
+      "html": "<div style=\"background:#063f20;padding:24px\"><a class=\"ds-btn-gold\" href=\"#\">Lihat PKKM 2026 <svg viewBox=\"0 0 24 24\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 12h14\"/><path d=\"m12 5 7 7-7 7\"/></svg></a></div>",
+      "css": ".ds-btn-gold { display: inline-flex; align-items: center; gap: 8px; border-radius: 9999px; padding: 10px 20px; font-family: Poppins, Inter, ui-sans-serif, system-ui, sans-serif; font-size: 0.875rem; font-weight: 600; text-decoration: none; background: #efc33a; color: #032a15; transition: background-color 200ms; } .ds-btn-gold:hover { background: #f6d76b; } .ds-btn-gold:focus-visible { outline: 2px solid #efc33a; outline-offset: 2px; }"
+    },
+    {
+      "name": "Tombol Garis",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Aksi sekunder di atas kertas, misalnya Semua berita.",
+      "html": "<a class=\"ds-btn-outline\" href=\"#\">Semua berita <svg viewBox=\"0 0 24 24\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 12h14\"/><path d=\"m12 5 7 7-7 7\"/></svg></a>",
+      "css": ".ds-btn-outline { display: inline-flex; align-items: center; gap: 8px; border-radius: 9999px; padding: 10px 20px; font-family: Poppins, Inter, ui-sans-serif, system-ui, sans-serif; font-size: 0.875rem; font-weight: 600; text-decoration: none; border: 1px solid #00843d; color: #006b32; background: transparent; transition: background-color 200ms; } .ds-btn-outline:hover { background: #eef7f1; } .ds-btn-outline:focus-visible { outline: 2px solid #efc33a; outline-offset: 2px; }"
+    },
+    {
+      "name": "Tombol Garis Terang",
+      "kind": "button",
+      "refersTo": "button-outline-light",
+      "description": "Pasangan sekunder tombol emas di atas hijau.",
+      "html": "<div style=\"background:#006b32;padding:24px\"><a class=\"ds-btn-outline-light\" href=\"#\">Hubungi kami</a></div>",
+      "css": ".ds-btn-outline-light { display: inline-flex; align-items: center; gap: 8px; border-radius: 9999px; padding: 10px 20px; font-family: Poppins, Inter, ui-sans-serif, system-ui, sans-serif; font-size: 0.875rem; font-weight: 600; text-decoration: none; border: 1px solid rgb(255 255 255 / 0.4); color: #fff; transition: background-color 200ms; } .ds-btn-outline-light:hover { background: rgb(255 255 255 / 0.1); } .ds-btn-outline-light:focus-visible { outline: 2px solid #efc33a; outline-offset: 2px; }"
+    },
+    {
+      "name": "Header",
+      "kind": "nav",
+      "refersTo": "header",
+      "description": "Header sticky hijau dengan lockup logo, afiliasi Kemenag, dan menu pil.",
+      "html": "<header class=\"ds-header\"><a class=\"ds-brand\" href=\"#\"><span class=\"ds-logo\">MC</span><span><span class=\"ds-aff\">Kementerian Agama Republik Indonesia</span><span class=\"ds-name\">MAN Contoh Sejahtera</span><span class=\"ds-tag\">Madrasah Hebat, Bermartabat</span></span></a><nav><a class=\"ds-nav-item is-active\" href=\"#\">Beranda</a><a class=\"ds-nav-item\" href=\"#\">Berita</a><a class=\"ds-nav-item\" href=\"#\">Galeri</a><a class=\"ds-nav-item\" href=\"#\">PKKM</a></nav></header>",
+      "css": ".ds-header { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 72px; padding: 0 32px; background: #055629; color: #fff; box-shadow: 0 6px 20px -10px rgb(3 42 21 / 0.6); font-family: Inter, ui-sans-serif, system-ui, sans-serif; } .ds-brand { display: flex; align-items: center; gap: 12px; color: inherit; text-decoration: none; } .ds-logo { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 9999px; background: #fff; color: #055629; font-family: Poppins, Inter, sans-serif; font-weight: 700; box-shadow: 0 0 0 2px #055629, 0 0 0 4px #efc33a; } .ds-aff { display: block; font-size: 0.6875rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.025em; color: #f6d76b; } .ds-name { display: block; font-family: Poppins, Inter, sans-serif; font-size: 1.125rem; font-weight: 600; line-height: 1.25; } .ds-tag { display: block; font-size: 0.75rem; color: rgb(215 238 223 / 0.9); } .ds-header nav { display: flex; gap: 4px; } .ds-nav-item { padding: 8px 14px; border-radius: 9999px; font-family: Poppins, Inter, sans-serif; font-size: 0.875rem; font-weight: 500; color: rgb(255 255 255 / 0.85); text-decoration: none; transition: background-color 200ms; } .ds-nav-item:hover, .ds-nav-item.is-active { background: rgb(255 255 255 / 0.1); color: #fff; } .ds-nav-item:focus-visible { outline: 2px solid #efc33a; outline-offset: 2px; }"
+    },
+    {
+      "name": "Kartu Berita",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Kartu putih 12px dengan bayangan hijau; tanpa gambar memakai gradien hijau dan ikon koran.",
+      "html": "<article class=\"ds-card\"><div class=\"ds-card-media\"><svg viewBox=\"0 0 24 24\" width=\"40\" height=\"40\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2\"/><path d=\"M18 14h-8\"/><path d=\"M15 18h-5\"/><path d=\"M10 6h8v4h-8V6Z\"/></svg><span class=\"ds-badge\">Kegiatan</span></div><div class=\"ds-card-body\"><p class=\"ds-meta\">17 November 2026</p><h3 class=\"ds-card-title\">Kunjungan Studi Banding dari Madrasah Mitra</h3><p class=\"ds-excerpt\">Ringkasan singkat berita untuk daftar dan kartu.</p><a class=\"ds-link-arrow\" href=\"#\">Baca selengkapnya &rarr;</a></div></article>",
+      "css": ".ds-card { width: 300px; overflow: hidden; border-radius: 12px; background: #fff; box-shadow: 0 1px 2px rgb(6 63 32 / 0.06), 0 8px 24px -12px rgb(6 63 32 / 0.18); transition: box-shadow 200ms; font-family: Inter, ui-sans-serif, system-ui, sans-serif; } .ds-card:hover { box-shadow: 0 1px 2px rgb(6 63 32 / 0.06), 0 18px 36px -16px rgb(6 63 32 / 0.32); } .ds-card-media { position: relative; display: grid; place-items: center; aspect-ratio: 16 / 10; background: linear-gradient(135deg, #00843d, #055629); color: rgb(255 255 255 / 0.8); } .ds-badge { position: absolute; left: 12px; top: 12px; border-radius: 9999px; background: #efc33a; color: #032a15; padding: 2px 10px; font-family: Poppins, Inter, sans-serif; font-size: 0.6875rem; font-weight: 600; } .ds-card-body { padding: 20px; } .ds-meta { margin: 0; font-size: 0.75rem; color: #55635b; } .ds-card-title { margin: 8px 0 0; font-family: Poppins, Inter, sans-serif; font-size: 1.0625rem; font-weight: 600; line-height: 1.375; color: #15231b; } .ds-excerpt { margin: 8px 0 0; font-size: 0.875rem; line-height: 1.625; color: #55635b; } .ds-link-arrow { display: inline-flex; margin-top: 16px; font-family: Poppins, Inter, sans-serif; font-size: 0.875rem; font-weight: 600; color: #006b32; text-decoration: none; } .ds-link-arrow:hover { color: #063f20; } .ds-link-arrow:focus-visible { outline: 2px solid #efc33a; outline-offset: 2px; }"
+    },
+    {
+      "name": "Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Pil hijau muda untuk tahun PKKM dan tag.",
+      "html": "<a class=\"ds-chip\" href=\"#\">2025</a> <a class=\"ds-chip\" href=\"#\">2024</a>",
+      "css": ".ds-chip { display: inline-flex; align-items: center; border-radius: 9999px; background: #eef7f1; color: #055629; padding: 4px 12px; font-family: Inter, ui-sans-serif, system-ui, sans-serif; font-size: 0.75rem; font-weight: 600; text-decoration: none; transition: background-color 200ms; } .ds-chip:hover { background: #d7eedf; } .ds-chip:focus-visible { outline: 2px solid #efc33a; outline-offset: 2px; }"
+    },
+    {
+      "name": "Tautan Cepat",
+      "kind": "custom",
+      "refersTo": "icon-tile",
+      "description": "Kartu tautan cepat dengan ubin ikon bulat; menumpang di tepi bawah banner.",
+      "html": "<a class=\"ds-quick\" href=\"#\"><span class=\"ds-tile\"><svg viewBox=\"0 0 24 24\" width=\"24\" height=\"24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect width=\"8\" height=\"4\" x=\"8\" y=\"2\" rx=\"1\"/><path d=\"M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2\"/><path d=\"m9 14 2 2 4-4\"/></svg></span><span><span class=\"ds-quick-title\">PKKM</span><span class=\"ds-quick-text\">Penilaian Kinerja Kepala Madrasah</span></span></a>",
+      "css": ".ds-quick { display: flex; align-items: center; gap: 12px; width: 280px; padding: 20px; border-radius: 12px; background: #fff; text-decoration: none; box-shadow: 0 1px 2px rgb(6 63 32 / 0.06), 0 8px 24px -12px rgb(6 63 32 / 0.18); transition: transform 200ms; font-family: Inter, ui-sans-serif, system-ui, sans-serif; } .ds-quick:hover { transform: translateY(-2px); } .ds-quick:focus-visible { outline: 2px solid #efc33a; outline-offset: 2px; } .ds-tile { display: grid; place-items: center; flex-shrink: 0; width: 48px; height: 48px; border-radius: 9999px; background: #eef7f1; color: #006b32; transition: background-color 200ms, color 200ms; } .ds-quick:hover .ds-tile { background: #00843d; color: #fff; } .ds-quick-title { display: block; font-family: Poppins, Inter, sans-serif; font-weight: 600; color: #15231b; } .ds-quick-text { display: block; margin-top: 2px; font-size: 0.875rem; line-height: 1.375; color: #55635b; }"
+    },
+    {
+      "name": "Empty State",
+      "kind": "custom",
+      "refersTo": "empty-state",
+      "description": "Pengganti daftar kosong: kotak putih berborder putus hijau dengan ubin ikon.",
+      "html": "<div class=\"ds-empty\"><span class=\"ds-empty-icon\"><svg viewBox=\"0 0 24 24\" width=\"28\" height=\"28\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M18 22H4a2 2 0 0 1-2-2V6\"/><path d=\"m22 13-1.296-1.296a2.41 2.41 0 0 0-3.408 0L11 18\"/><circle cx=\"12\" cy=\"8\" r=\"2\"/><rect width=\"16\" height=\"16\" x=\"6\" y=\"2\" rx=\"2\"/></svg></span><p class=\"ds-empty-title\">Belum ada album</p><p class=\"ds-empty-msg\">Foto kegiatan madrasah akan tampil di sini.</p></div>",
+      "css": ".ds-empty { display: flex; flex-direction: column; align-items: center; padding: 56px 24px; border: 1px dashed #a9d9b9; border-radius: 12px; background: #fff; text-align: center; font-family: Inter, ui-sans-serif, system-ui, sans-serif; } .ds-empty-icon { display: grid; place-items: center; width: 56px; height: 56px; border-radius: 9999px; background: #eef7f1; color: #00843d; } .ds-empty-title { margin: 16px 0 0; font-family: Poppins, Inter, sans-serif; font-size: 1.125rem; font-weight: 600; color: #15231b; } .ds-empty-msg { margin: 4px 0 0; max-width: 28rem; font-size: 0.875rem; color: #55635b; }"
+    },
+    {
+      "name": "Page Header",
+      "kind": "custom",
+      "refersTo": "page-header",
+      "description": "Pita judul halaman isi: hijau brand-700, breadcrumb, h1, lead, garis bawah emas 4px.",
+      "html": "<section class=\"ds-page-header\"><nav class=\"ds-crumbs\">Beranda <span>&rsaquo;</span> Guru &amp; Pegawai</nav><h1>Guru &amp; Pegawai</h1><p>Pendidik dan tenaga kependidikan madrasah.</p></section>",
+      "css": ".ds-page-header { padding: 56px 32px; background: #006b32; color: #fff; border-bottom: 4px solid #efc33a; font-family: Inter, ui-sans-serif, system-ui, sans-serif; } .ds-crumbs { font-size: 0.875rem; color: #d7eedf; } .ds-crumbs span { color: #6fbf8c; margin: 0 6px; } .ds-page-header h1 { margin: 16px 0 0; font-family: Poppins, Inter, sans-serif; font-size: 2.5rem; font-weight: 600; line-height: 1.25; letter-spacing: -0.025em; } .ds-page-header p { margin: 12px 0 0; max-width: 42rem; color: #d7eedf; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Papan Pengumuman Madrasah yang Rapi",
+    "overview": "Situs ini sengaja memakai bentuk standar kategori situs madrasah Indonesia: topbar hijau tua dengan running text, header hijau resmi dengan logo dan nama madrasah, banner selebar layar, empat tautan cepat yang menumpang di tepi bawah banner, berita di depan, lalu band PKKM, galeri, kontak, dan footer hijau. Kebaruannya bukan pada bentuk, melainkan pada kerapian: hierarki tegas, jarak yang konsisten, ikon garis satu ketebalan, dan setiap bagian tetap utuh ketika kontennya kosong. Patokan kerapiannya adalah mayoga.sch.id (MAN 3 Sleman).\n\nIdentitas dibawa oleh hijau Kemenag bertingkat: hijau paling tua untuk topbar, hijau tua untuk header dan footer, hijau utama (#00843d) untuk aksi dan aksen, dan hijau sangat muda untuk latar ikon serta chip. Emas Kemenag hadir hanya sebagai titik kecil dan tombol pil utama. Halaman berlatar kertas putih kehijauan, bukan putih murni, sehingga kartu putih terangkat dengan bayangan hijau yang lembut. Kepadatan sedang: ramah ponsel, satu kolom di layar kecil, dua sampai empat kolom di desktop.\n\nSistem ini menolak tampilan template polos tanpa identitas dan juga dunia visual eksperimental. Tidak ada efek blur atau kaca dekoratif, tidak ada label kecil (eyebrow/kicker) di atas judul.",
+    "keyCharacteristics": [
+      "Bentuk standar situs madrasah, dikerjakan rapi; bukan eksperimen visual.",
+      "Hijau Kemenag bertingkat sebagai identitas; emas hanya aksen kecil dan tombol pil utama.",
+      "Poppins untuk judul dan label tombol, Inter untuk teks.",
+      "Kartu putih bersudut 12px di atas kertas kehijauan, bayangan berwarna hijau tua.",
+      "Tombol selalu berbentuk pil.",
+      "Ikon garis Lucide, satu ketebalan (1.75).",
+      "Setiap bagian tetap rapi tanpa gambar dan tanpa konten."
+    ],
+    "rules": [
+      {
+        "name": "The Gold Seasoning Rule",
+        "body": "Emas hanya untuk aksen kecil (lencana, titik, garis bawah 4px, cincin, ikon kecil, outline fokus) dan tombol pil utama. Emas tidak pernah menjadi latar bidang besar, latar bagian, atau warna teks paragraf.",
+        "section": "colors"
+      },
+      {
+        "name": "The Green Ladder Rule",
+        "body": "Semakin tinggi posisi pita di halaman, semakin tua hijaunya: topbar brand-950, header brand-800, page header brand-700. Footer kembali ke brand-900. Jangan menukar urutan ini.",
+        "section": "colors"
+      },
+      {
+        "name": "The Paper, Not White Rule",
+        "body": "Latar halaman selalu paper; putih murni hanya untuk kartu, panel, dan dropdown agar terangkat.",
+        "section": "colors"
+      },
+      {
+        "name": "The No Kicker Rule",
+        "body": "Tidak ada label kecil huruf kapital di atas judul bagian. Judul berdiri sendiri, diikuti satu baris lead berwarna muted bila perlu. Satu-satunya baris kecil berhuruf kapital adalah afiliasi \"Kementerian Agama Republik Indonesia\" di lockup logo header (bentuk pendek \"Kementerian Agama RI\" di bawah breakpoint sm); itu identitas institusi, bukan kicker.",
+        "section": "typography"
+      },
+      {
+        "name": "The Poppins Speaks, Inter Explains Rule",
+        "body": "Poppins untuk judul, nama, label tombol, dan angka penting; Inter untuk semua kalimat. Angka hitungan memakai tabular-nums.",
+        "section": "typography"
+      },
+      {
+        "name": "The Empty Still Stands Rule",
+        "body": "Setiap bagian harus tetap rapi tanpa konten dan tanpa gambar: foto kosong diganti inisial di atas gradien hijau muda, thumbnail kosong diganti ubin ikon, daftar kosong diganti komponen empty state, banner tanpa slide diganti panel hijau dengan nama madrasah dan dua tombol. Tidak ada bagian yang meninggalkan lubang.",
+        "section": "layout"
+      },
+      {
+        "name": "The Green Shadow Rule",
+        "body": "Bayangan di atas kertas selalu berbasis hijau tua (rgb 6 63 32 atau 3 42 21), tidak pernah abu netral.",
+        "section": "elevation"
+      },
+      {
+        "name": "The No Glass Rule",
+        "body": "Tidak ada backdrop-blur, glassmorphism, atau blur dekoratif. Kedalaman datang dari bayangan hijau, tonalitas hijau, dan gradien overlay foto.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do pakai hijau Kemenag bertingkat sesuai The Green Ladder Rule: topbar brand-950, header brand-800, page header brand-700, footer brand-900.",
+      "Do batasi emas pada aksen kecil dan tombol pil utama di atas hijau atau foto.",
+      "Do pakai tombol pil untuk semua aksi, Poppins 600 0.875rem.",
+      "Do taruh kartu putih bersudut 12px dengan bayangan hijau di atas latar paper.",
+      "Do sediakan pengganti untuk setiap konten yang bisa kosong: inisial, ubin ikon, empty state, panel hijau tanpa slide.",
+      "Do pakai ikon garis Lucide stroke 1.75 lewat komponen site-icon.",
+      "Do tampilkan \"Kementerian Agama Republik Indonesia\" di lockup header, dan \"Kementerian Agama RI\" di bawah breakpoint sm.",
+      "Do hormati prefers-reduced-motion: marquee, slider otomatis, dan smooth scroll dimatikan."
+    ],
+    "donts": [
+      "Don't pasang label kecil (eyebrow/kicker) di atas judul bagian.",
+      "Don't pakai blur, backdrop-blur, atau efek kaca dekoratif.",
+      "Don't pakai emas sebagai latar bidang besar, latar bagian, atau warna paragraf.",
+      "Don't pakai bayangan abu atau hitam di atas kertas; bayangan selalu berbasis hijau tua.",
+      "Don't biarkan bagian kosong meninggalkan lubang atau gambar rusak.",
+      "Don't bergeser ke dunia visual eksperimental atau tampilan template polos tanpa identitas.",
+      "Don't pakai ikon isi, emoji, atau ikon dengan ketebalan garis berbeda."
+    ]
+  }
+}

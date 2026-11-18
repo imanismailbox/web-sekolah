@@ -94,7 +94,7 @@ Skeleton kosong — tidak ada kode untuk di-reuse selain `App\Models\User` dan T
 - [x] 10. UserResource + ActivityResource (read-only)
 - [x] 11. Shield generate permissions/policies + `RolePermissionSeeder` (4 role) + super admin seeder
 - [x] 12. Tests feature (PHPUnit + Livewire): render list/create tiap resource, akses per role, duplikat PKKM, resolver URL menu, activity log tercatat
-- [ ] 13. `vendor/bin/pint`, `php artisan test`
+- [x] 13. `vendor/bin/pint`, `php artisan test`
 
 ## Verification
 - `php artisan migrate:fresh --seed` sukses di MySQL
@@ -105,5 +105,15 @@ Skeleton kosong — tidak ada kode untuk di-reuse selain `App\Models\User` dan T
   - membuat Post menulis entri `activity_log`
 - Manual: login `/admin`, coba CRUD berita dengan tags, upload galeri, isi PKKM (link + file), duplikat tahun, simpan pengaturan, susun menu drag-drop
 
-## Di luar scope (fase berikut)
-Frontend publik (beranda + slideshow, berita, galeri, guru, halaman, `/pkkm/{tahun}`, menu render), SEO/sitemap.
+## Fase 2: Frontend publik
+- [x] 1. Layout publik + render menu navigasi & footer (`MenuItem::url()`, item nonaktif disembunyikan)
+- [x] 2. Beranda: slideshow aktif, sambutan kepala madrasah, berita terbaru/featured
+- [x] 3. Berita: daftar (filter kategori & tag, paginasi) + detail `/berita/{slug}` (increment views)
+- [x] 4. Galeri: daftar album `/galeri` + detail `/galeri/{slug}`
+- [x] 5. Guru & Pegawai `/guru` (dikelompokkan per tipe, hanya aktif)
+- [x] 6. Halaman dinamis `/{slug}` (published saja)
+- [x] 7. PKKM: `/pkkm` (daftar tahun) + `/pkkm/{tahun}` (komponen, unsur, indikator, bukti link/file)
+- [x] 8. Kontak `/kontak` (data dari Pengaturan, maps embed bila ada)
+- [x] 9. Halaman 404 dan error
+- [x] 10. SEO: meta title/description, Open Graph, `sitemap.xml`
+- [x] 11. Tests feature untuk halaman publik (hanya konten published yang tampil)
