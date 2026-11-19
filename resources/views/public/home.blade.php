@@ -122,13 +122,13 @@
                     </figure>
                     <div class="pt-6 lg:pt-0">
                         <h2 id="sambutan" class="text-3xl font-semibold tracking-tight text-brand-900 sm:text-4xl">Sambutan Kepala Madrasah</h2>
-                        <div class="prose-site mt-6 text-muted">{!! nl2br(e($settings->headmaster_greeting)) !!}</div>
+                        <div class="prose-site mt-6 text-muted">{!! $settings->headmaster_greeting !!}</div>
                     </div>
                 </div>
             @else
                 <div class="mx-auto max-w-3xl">
                     <h2 id="sambutan" class="text-3xl font-semibold tracking-tight text-brand-900 sm:text-4xl">Sambutan Kepala Madrasah</h2>
-                    <div class="prose-site mt-6 text-muted">{!! nl2br(e($settings->headmaster_greeting)) !!}</div>
+                    <div class="prose-site mt-6 text-muted">{!! $settings->headmaster_greeting !!}</div>
                     @if ($settings->headmaster_name)
                         <p class="mt-8 flex items-center gap-4">
                             <span class="grid size-12 shrink-0 place-items-center rounded-full bg-brand-600 font-display font-semibold text-white" aria-hidden="true">{{ collect(preg_split('/\s+/', trim(preg_replace('/[^\pL\s]/u', ' ', $settings->headmaster_name))))->filter(fn ($word) => mb_strlen($word) > 1)->reject(fn ($word) => in_array(mb_strtolower($word), ['dr', 'drs', 'hj', 'ir', 'prof']))->take(2)->map(fn ($word) => mb_strtoupper(mb_substr($word, 0, 1)))->implode('') }}</span>
