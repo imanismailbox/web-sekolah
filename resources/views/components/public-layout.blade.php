@@ -250,5 +250,72 @@
             </div>
         </div>
     </footer>
+
+    @if ($settings->background_music_enabled && $settings->background_music)
+        {{-- Musik latar: diputar otomatis; jika diblokir browser, mulai pada interaksi pertama. Posisi putar diingat antar halaman. --}}
+        <audio id="background-music" src="{{ Storage::disk('public')->url($settings->background_music) }}" loop preload="auto"></audio>
+        <button type="button" class="fixed bottom-4 left-4 z-40 grid size-12 place-items-center rounded-full bg-brand-800 text-white shadow-[0_10px_30px_-10px_rgb(3_42_21/0.7)] ring-2 ring-gold-400 hover:bg-brand-700 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold-300" data-music-toggle aria-pressed="false" aria-label="Putar musik latar">
+            <x-site-icon name="play" class="size-5" data-music-icon-play />
+            <x-site-icon name="pause" class="hidden size-5" data-music-icon-pause />
+        </button>
+        <script>
+            (function () {
+                const audio = document.getElementById('background-music');
+                const button = document.querySelector('[data-music-toggle]');
+                const playIcon = button.querySelector('[data-music-icon-play]');
+                const pauseIcon = button.querySelector('[data-music-icon-pause]');
+                const preferenceKey = 'backgroundMusic:preference';
+                const positionKey = 'backgroundMusic:position';
+                let wantsPlaying = localStorage.getItem(preferenceKey) !== 'paused';
+
+                const render = () => {
+                    const playing = !audio.paused;
+                    button.setAttribute('aria-pressed', String(playing));
+                    button.setAttribute('aria-label', playing ? 'Jeda musik latar' : 'Putar musik latar');
+                    playIcon.classList.toggle('hidden', playing);
+                    pauseIcon.classList.toggle('hidden', !playing);
+                };
+
+                const tryPlay = () => audio.play().catch(() => {});
+
+                audio.addEventListener('loadedmetadata', () => {
+                    const savedPosition = parseFloat(sessionStorage.getItem(positionKey));
+                    if (Number.isFinite(savedPosition) && savedPosition < audio.duration) {
+                        audio.currentTime = savedPosition;
+                    }
+                });
+                audio.addEventListener('timeupdate', () => {
+                    sessionStorage.setItem(positionKey, String(audio.currentTime));
+                });
+                audio.addEventListener('play', render);
+                audio.addEventListener('pause', render);
+
+                button.addEventListener('click', () => {
+                    if (audio.paused) {
+                        wantsPlaying = true;
+                        localStorage.setItem(preferenceKey, 'playing');
+                        tryPlay();
+                    } else {
+                        wantsPlaying = false;
+                        localStorage.setItem(preferenceKey, 'paused');
+                        audio.pause();
+                    }
+                });
+
+                if (wantsPlaying) {
+                    tryPlay();
+                    ['pointerdown', 'keydown', 'touchend'].forEach((eventName) => {
+                        window.addEventListener(eventName, () => {
+                            if (wantsPlaying && audio.paused) {
+                                tryPlay();
+                            }
+                        }, { once: true, passive: true });
+                    });
+                }
+
+                render();
+            })();
+        </script>
+    @endif
 </body>
 </html>

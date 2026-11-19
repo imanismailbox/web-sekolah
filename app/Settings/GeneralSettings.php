@@ -40,6 +40,10 @@ class GeneralSettings extends Settings
 
     public ?string $footer_text;
 
+    public ?string $background_music;
+
+    public bool $background_music_enabled;
+
     public static function group(): string
     {
         return 'general';

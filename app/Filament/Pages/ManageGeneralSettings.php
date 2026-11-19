@@ -9,6 +9,7 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Pages\SettingsPage;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Tabs;
@@ -103,6 +104,20 @@ class ManageGeneralSettings extends SettingsPage
                                     ->directory('settings'),
                                 RichEditor::make('headmaster_greeting')
                                     ->label('Sambutan'),
+                            ]),
+                        Tab::make('Musik Latar')
+                            ->icon(Heroicon::OutlinedMusicalNote)
+                            ->schema([
+                                Toggle::make('background_music_enabled')
+                                    ->label('Putar musik latar di situs')
+                                    ->helperText('Musik diputar otomatis saat halaman dibuka. Jika browser memblokir pemutaran otomatis, musik akan mulai saat pengunjung pertama kali berinteraksi dengan halaman.'),
+                                FileUpload::make('background_music')
+                                    ->label('File Musik (MP3/OGG)')
+                                    ->acceptedFileTypes(['audio/mpeg', 'audio/ogg', 'audio/mp4', 'audio/wav'])
+                                    ->maxSize(20480)
+                                    ->disk('public')
+                                    ->directory('settings')
+                                    ->helperText('Maksimal 20 MB. Musik akan diulang (loop) selama halaman terbuka.'),
                             ]),
                     ]),
             ]);
