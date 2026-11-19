@@ -208,7 +208,7 @@ class PublicPagesTest extends TestCase
 
     public function test_admin_panel_is_still_reachable_after_public_catch_all_route(): void
     {
-        $this->get('/admin/login')->assertOk();
+        $this->get('/kelola-portal-madrasah/login')->assertOk();
     }
 
     public function test_sitemap_lists_only_published_content(): void

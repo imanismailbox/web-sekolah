@@ -27,36 +27,36 @@ class AdminPanelAccessTest extends TestCase
     public static function adminPages(): array
     {
         return [
-            'posts' => ['/admin/posts', ['admin', 'editor']],
-            'posts create' => ['/admin/posts/create', ['admin', 'editor']],
-            'categories' => ['/admin/categories', ['admin', 'editor']],
-            'pages' => ['/admin/pages', ['admin']],
-            'pages create' => ['/admin/pages/create', ['admin']],
-            'slides' => ['/admin/slides', ['admin', 'editor']],
-            'albums' => ['/admin/albums', ['admin', 'editor']],
-            'albums create' => ['/admin/albums/create', ['admin', 'editor']],
-            'staff' => ['/admin/staff', ['admin']],
-            'staff create' => ['/admin/staff/create', ['admin']],
-            'pkkm' => ['/admin/pkkm-years', ['admin', 'editor_pkkm']],
-            'pkkm create' => ['/admin/pkkm-years/create', ['admin', 'editor_pkkm']],
-            'menu' => ['/admin/menu-items', ['admin']],
-            'settings' => ['/admin/manage-general-settings', ['admin']],
-            'users' => ['/admin/users', []],
-            'users create' => ['/admin/users/create', []],
-            'roles' => ['/admin/shield/roles', []],
-            'activity log' => ['/admin/activity-logs', []],
+            'posts' => ['/kelola-portal-madrasah/posts', ['admin', 'editor']],
+            'posts create' => ['/kelola-portal-madrasah/posts/create', ['admin', 'editor']],
+            'categories' => ['/kelola-portal-madrasah/categories', ['admin', 'editor']],
+            'pages' => ['/kelola-portal-madrasah/pages', ['admin']],
+            'pages create' => ['/kelola-portal-madrasah/pages/create', ['admin']],
+            'slides' => ['/kelola-portal-madrasah/slides', ['admin', 'editor']],
+            'albums' => ['/kelola-portal-madrasah/albums', ['admin', 'editor']],
+            'albums create' => ['/kelola-portal-madrasah/albums/create', ['admin', 'editor']],
+            'staff' => ['/kelola-portal-madrasah/staff', ['admin']],
+            'staff create' => ['/kelola-portal-madrasah/staff/create', ['admin']],
+            'pkkm' => ['/kelola-portal-madrasah/pkkm-years', ['admin', 'editor_pkkm']],
+            'pkkm create' => ['/kelola-portal-madrasah/pkkm-years/create', ['admin', 'editor_pkkm']],
+            'menu' => ['/kelola-portal-madrasah/menu-items', ['admin']],
+            'settings' => ['/kelola-portal-madrasah/manage-general-settings', ['admin']],
+            'users' => ['/kelola-portal-madrasah/users', []],
+            'users create' => ['/kelola-portal-madrasah/users/create', []],
+            'roles' => ['/kelola-portal-madrasah/shield/roles', []],
+            'activity log' => ['/kelola-portal-madrasah/activity-logs', []],
         ];
     }
 
     public function test_guest_is_redirected_to_login(): void
     {
-        $this->get('/admin')->assertRedirect('/admin/login');
+        $this->get('/kelola-portal-madrasah')->assertRedirect('/kelola-portal-madrasah/login');
     }
 
     public function test_user_without_panel_role_is_forbidden(): void
     {
         $this->actingAs(User::factory()->create())
-            ->get('/admin')
+            ->get('/kelola-portal-madrasah')
             ->assertForbidden();
     }
 
