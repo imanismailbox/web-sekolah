@@ -48,4 +48,12 @@ class PkkmEvidence extends Model
             default => $this->url,
         };
     }
+
+    /**
+     * Whether this evidence slot already has an uploaded file or link.
+     */
+    public function isFilled(): bool
+    {
+        return filled($this->href());
+    }
 }

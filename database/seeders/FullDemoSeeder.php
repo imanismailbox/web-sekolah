@@ -274,11 +274,12 @@ class FullDemoSeeder extends Seeder
             'content' => $this->pkkmContent($pkkmYear->year),
         ]);
 
-        if (PkkmEvidence::query()->exists()) {
+        if (PkkmEvidence::query()->whereNotNull('url')->orWhereNotNull('file_path')->exists()) {
             return $pkkmYear;
         }
 
         $indicators = PkkmIndicator::query()
+            ->with('evidence')
             ->whereIn(
                 'pkkm_item_id',
                 PkkmItem::query()
@@ -288,11 +289,21 @@ class FullDemoSeeder extends Seeder
             ->get();
 
         foreach ($indicators as $indicator) {
-            PkkmEvidence::factory()->create([
-                'pkkm_indicator_id' => $indicator->id,
-                'label' => 'Lihat Bukti',
-                'sort' => 1,
-            ]);
+            if ($indicator->evidence->isEmpty()) {
+                PkkmEvidence::factory()->create([
+                    'pkkm_indicator_id' => $indicator->id,
+                    'label' => 'Lihat Bukti',
+                    'sort' => 1,
+                ]);
+
+                continue;
+            }
+
+            foreach ($indicator->evidence as $evidence) {
+                $evidence->update([
+                    'url' => 'https://drive.google.com/file/d/demo-pkkm-'.$evidence->id.'/view',
+                ]);
+            }
         }
 
         return $pkkmYear;

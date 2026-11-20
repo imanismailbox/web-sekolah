@@ -86,7 +86,7 @@ class PkkmYearResourceTest extends TestCase
         $this->assertSame('https://drive.google.com/file/d/abc/view', $evidence->href());
     }
 
-    public function test_link_evidence_requires_url(): void
+    public function test_link_evidence_allows_empty_url_for_checklist_and_validates_url_when_filled(): void
     {
         Repeater::fake();
         $year = PkkmYear::factory()->create();
@@ -101,15 +101,36 @@ class PkkmYearResourceTest extends TestCase
                     'indicators' => [[
                         'description' => 'Indikator',
                         'evidence' => [[
+                            'label' => 'FILE Bagan/Struktur Organisasi Madrasah',
                             'type' => EvidenceType::Link->value,
                             'url' => null,
                         ]],
                     ]],
                 ]],
             ])
-            ->assertHasActionErrors(['items.0.indicators.0.evidence.0.url' => 'required']);
+            ->assertHasNoActionErrors();
 
-        $this->assertSame(0, $year->components()->count());
+        $evidence = $year->components()->sole()->items()->sole()->indicators()->sole()->evidence()->sole();
+        $this->assertFalse($evidence->isFilled());
+
+        Livewire::test(ComponentsRelationManager::class, ['ownerRecord' => $year, 'pageClass' => EditPkkmYear::class])
+            ->callAction(TestAction::make('create')->table(), data: [
+                'code' => 'B',
+                'name' => 'Komponen B',
+                'items' => [[
+                    'code' => '2.1',
+                    'name' => 'Unsur',
+                    'indicators' => [[
+                        'description' => 'Indikator',
+                        'evidence' => [[
+                            'label' => 'Berkas',
+                            'type' => EvidenceType::Link->value,
+                            'url' => 'bukan-url',
+                        ]],
+                    ]],
+                ]],
+            ])
+            ->assertHasActionErrors(['items.0.indicators.0.evidence.0.url' => 'url']);
     }
 
     public function test_edit_page_renders_for_seeded_template(): void

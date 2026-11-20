@@ -3,6 +3,8 @@
 namespace App\Filament\Resources\PkkmYears\RelationManagers;
 
 use App\Enums\EvidenceType;
+use App\Models\PkkmComponent;
+use App\Models\PkkmEvidence;
 use App\Models\PkkmYear;
 use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteAction;
@@ -19,6 +21,7 @@ use Filament\Schemas\Schema;
 use Filament\Support\Enums\Width;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 
 /**
@@ -106,6 +109,7 @@ class ComponentsRelationManager extends RelationManager
     {
         return $table
             ->recordTitleAttribute('name')
+            ->modifyQueryUsing(fn (Builder $query): Builder => $query->with('items.indicators.evidence'))
             ->reorderable('sort')
             ->defaultSort('sort')
             ->columns([
@@ -117,6 +121,26 @@ class ComponentsRelationManager extends RelationManager
                 TextColumn::make('items_count')
                     ->label('Unsur')
                     ->counts('items'),
+                TextColumn::make('evidence_progress')
+                    ->label('Bukti Terisi')
+                    ->badge()
+                    ->state(function (PkkmComponent $record): string {
+                        $evidence = $record->items->flatMap->indicators->flatMap->evidence;
+                        $filled = $evidence->filter(fn (PkkmEvidence $item): bool => $item->isFilled())->count();
+
+                        return "{$filled} / {$evidence->count()}";
+                    })
+                    ->color(function (PkkmComponent $record): string {
+                        $evidence = $record->items->flatMap->indicators->flatMap->evidence;
+                        $total = $evidence->count();
+                        $filled = $evidence->filter(fn (PkkmEvidence $item): bool => $item->isFilled())->count();
+
+                        if ($total === 0 || $filled === 0) {
+                            return 'gray';
+                        }
+
+                        return $filled === $total ? 'success' : 'warning';
+                    }),
             ])
             ->headerActions([
                 CreateAction::make()
@@ -139,16 +163,24 @@ class ComponentsRelationManager extends RelationManager
         ) === $type;
 
         return Repeater::make('evidence')
-            ->label('Bukti Dukung')
+            ->label('Rincian Bukti Dukung')
             ->relationship()
             ->orderColumn('sort')
+            ->collapsible()
+            ->collapsed()
             ->addActionLabel('Tambah Bukti')
+            ->itemLabel(function (array $state): string {
+                $filled = filled($state['url'] ?? null) || filled($state['file_path'] ?? null);
+                $prefix = $filled ? '✓' : '○';
+
+                return trim($prefix.' '.($state['label'] ?? 'Bukti Dukung'));
+            })
             ->defaultItems(0)
             ->grid(2)
             ->schema([
                 TextInput::make('label')
-                    ->label('Label')
-                    ->placeholder('Lihat')
+                    ->label('Rincian Bukti')
+                    ->placeholder('Nama berkas / bukti dukung')
                     ->default('Lihat')
                     ->maxLength(255),
                 ToggleButtons::make('type')
@@ -160,10 +192,10 @@ class ComponentsRelationManager extends RelationManager
                     ->required(),
                 TextInput::make('url')
                     ->label('URL (Google Drive, dll.)')
+                    ->placeholder('Kosongkan jika belum diunggah')
                     ->url()
                     ->maxLength(2048)
-                    ->visible($isType(EvidenceType::Link))
-                    ->required($isType(EvidenceType::Link)),
+                    ->visible($isType(EvidenceType::Link)),
                 FileUpload::make('file_path')
                     ->label('Berkas')
                     ->disk('public')
@@ -172,8 +204,7 @@ class ComponentsRelationManager extends RelationManager
                     ->maxSize(10240)
                     ->openable()
                     ->downloadable()
-                    ->visible($isType(EvidenceType::File))
-                    ->required($isType(EvidenceType::File)),
+                    ->visible($isType(EvidenceType::File)),
             ]);
     }
 

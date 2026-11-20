@@ -2,7 +2,7 @@
 <x-public-layout :title="$pkkmYear->title" :description="$pkkmYear->description ?? $pkkmYear->title">
     <x-page-header :title="$pkkmYear->title" :breadcrumbs="['PKKM' => route('pkkm.index'), (string) $pkkmYear->year => null]" :lead="$pkkmYear->description">
         <dl class="mt-6 flex flex-wrap gap-3">
-            @foreach (['Komponen' => $summary['components'], 'Indikator' => $summary['indicators'], 'Bukti' => $summary['evidence']] as $summaryLabel => $summaryValue)
+            @foreach (['Komponen' => $summary['components'], 'Indikator' => $summary['indicators'], 'Bukti' => $summary['evidence'] > 0 ? "{$summary['filled_evidence']}/{$summary['evidence']}" : 0] as $summaryLabel => $summaryValue)
                 <div class="flex items-baseline gap-2 rounded-full bg-white/10 px-4 py-1.5 text-sm">
                     <dd class="order-first font-display text-lg font-semibold tabular-nums text-white">{{ $summaryValue }}</dd>
                     <dt class="text-brand-100">{{ $summaryLabel }}</dt>
@@ -86,7 +86,12 @@
                                                                                     <x-site-icon :name="$isFile ? 'download' : 'external-link'" class="mt-0.5 size-4 text-muted" />
                                                                                 </a>
                                                                             @else
-                                                                                <span class="flex items-center gap-2.5 rounded-lg border border-dashed border-line px-3 py-2 text-sm text-muted">{{ $evidence->label }}</span>
+                                                                                <span class="flex items-start gap-2.5 rounded-lg border border-dashed border-line px-3 py-2 text-sm text-muted">
+                                                                                    <span class="min-w-0 flex-1">
+                                                                                        <span class="block text-ink/70">{{ $evidence->label }}</span>
+                                                                                        <span class="block text-xs text-muted">Belum diunggah</span>
+                                                                                    </span>
+                                                                                </span>
                                                                             @endif
                                                                         </li>
                                                                     @endforeach

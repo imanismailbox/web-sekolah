@@ -3,6 +3,7 @@
 namespace Tests\Feature\Seeders;
 
 use App\Models\PkkmComponent;
+use App\Models\PkkmEvidence;
 use App\Models\PkkmIndicator;
 use App\Models\PkkmItem;
 use App\Models\PkkmYear;
@@ -14,24 +15,25 @@ class PkkmTemplateSeederTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_seeds_complete_pkkm_instrument_structure(): void
+    public function test_seeds_complete_pkkm_instrument_and_evidence_checklist(): void
     {
         $this->seed(PkkmTemplateSeeder::class);
 
         $year = PkkmYear::query()->where('year', now()->year)->sole();
-        $year->load('components.items.indicators');
+        $year->load('components.items.indicators.evidence');
 
         $this->assertFalse($year->is_published);
         $this->assertCount(5, $year->components);
         $this->assertSame(29, PkkmItem::query()->count());
         $this->assertSame(108, PkkmIndicator::query()->count());
+        $this->assertSame(267, PkkmEvidence::query()->count());
 
         $expectedCounts = [
-            'A' => ['items' => 7, 'indicators' => 25],
-            'B' => ['items' => 10, 'indicators' => 41],
-            'C' => ['items' => 5, 'indicators' => 19],
-            'D' => ['items' => 3, 'indicators' => 10],
-            'E' => ['items' => 4, 'indicators' => 13],
+            'A' => ['items' => 7, 'indicators' => 25, 'evidence' => 103],
+            'B' => ['items' => 10, 'indicators' => 41, 'evidence' => 99],
+            'C' => ['items' => 5, 'indicators' => 18, 'evidence' => 38],
+            'D' => ['items' => 3, 'indicators' => 11, 'evidence' => 27],
+            'E' => ['items' => 4, 'indicators' => 13, 'evidence' => 0],
         ];
 
         foreach ($expectedCounts as $code => $counts) {
@@ -44,7 +46,16 @@ class PkkmTemplateSeederTest extends TestCase
                 $component->items->sum(fn (PkkmItem $item): int => $item->indicators->count()),
                 "Component {$code} indicator count mismatch.",
             );
+            $this->assertSame(
+                $counts['evidence'],
+                $component->items->flatMap->indicators->sum(fn (PkkmIndicator $indicator): int => $indicator->evidence->count()),
+                "Component {$code} evidence count mismatch.",
+            );
         }
+
+        $summary = $year->summary();
+        $this->assertSame(267, $summary['evidence']);
+        $this->assertSame(0, $summary['filled_evidence']);
 
         $this->assertSame(
             0,
@@ -57,7 +68,7 @@ class PkkmTemplateSeederTest extends TestCase
         );
     }
 
-    public function test_seeder_is_idempotent_and_backfills_missing_indicators(): void
+    public function test_seeder_is_idempotent_and_backfills_missing_indicators_and_evidence(): void
     {
         $year = PkkmYear::factory()->create(['year' => now()->year]);
         $component = PkkmComponent::factory()->for($year, 'year')->create([
@@ -65,9 +76,14 @@ class PkkmTemplateSeederTest extends TestCase
             'name' => 'Usaha Pengembangan Madrasah',
             'sort' => 1,
         ]);
-        PkkmItem::factory()->for($component, 'component')->create([
+        $item = PkkmItem::factory()->for($component, 'component')->create([
             'code' => '1.1',
             'name' => 'Mengembangkan madrasah sesuai dengan kebutuhan',
+            'sort' => 1,
+        ]);
+        PkkmIndicator::factory()->for($item, 'item')->create([
+            'number' => '1',
+            'description' => 'Mampu mengembangkan struktur organisasi yang sesuai dengan kebutuhan program.',
             'sort' => 1,
         ]);
 
@@ -78,5 +94,6 @@ class PkkmTemplateSeederTest extends TestCase
         $this->assertSame(5, PkkmComponent::query()->count());
         $this->assertSame(29, PkkmItem::query()->count());
         $this->assertSame(108, PkkmIndicator::query()->count());
+        $this->assertSame(267, PkkmEvidence::query()->count());
     }
 }

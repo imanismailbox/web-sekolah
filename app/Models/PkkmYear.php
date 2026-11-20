@@ -48,16 +48,18 @@ class PkkmYear extends Model
     /**
      * Ringkasan jumlah komponen, indikator, dan bukti (relasi harus sudah dimuat).
      *
-     * @return array{components: int, indicators: int, evidence: int}
+     * @return array{components: int, indicators: int, evidence: int, filled_evidence: int}
      */
     public function summary(): array
     {
         $indicators = $this->components->flatMap->items->flatMap->indicators;
+        $evidence = $indicators->flatMap->evidence;
 
         return [
             'components' => $this->components->count(),
             'indicators' => $indicators->count(),
-            'evidence' => $indicators->sum(fn (PkkmIndicator $indicator): int => $indicator->evidence->count()),
+            'evidence' => $evidence->count(),
+            'filled_evidence' => $evidence->filter(fn (PkkmEvidence $item): bool => $item->isFilled())->count(),
         ];
     }
 }
