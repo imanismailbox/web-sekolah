@@ -274,28 +274,25 @@ class FullDemoSeeder extends Seeder
             'content' => $this->pkkmContent($pkkmYear->year),
         ]);
 
-        if (PkkmIndicator::query()->exists()) {
+        if (PkkmEvidence::query()->exists()) {
             return $pkkmYear;
         }
 
-        $items = PkkmItem::query()
-            ->whereIn('pkkm_component_id', $pkkmYear->components()->pluck('id'))
+        $indicators = PkkmIndicator::query()
+            ->whereIn(
+                'pkkm_item_id',
+                PkkmItem::query()
+                    ->whereIn('pkkm_component_id', $pkkmYear->components()->pluck('id'))
+                    ->pluck('id'),
+            )
             ->get();
 
-        foreach ($items as $item) {
-            foreach (range(1, 2) as $number) {
-                $indicator = PkkmIndicator::factory()->create([
-                    'pkkm_item_id' => $item->id,
-                    'number' => (string) $number,
-                    'sort' => $number,
-                ]);
-
-                PkkmEvidence::factory()->create([
-                    'pkkm_indicator_id' => $indicator->id,
-                    'label' => 'Lihat Bukti',
-                    'sort' => 1,
-                ]);
-            }
+        foreach ($indicators as $indicator) {
+            PkkmEvidence::factory()->create([
+                'pkkm_indicator_id' => $indicator->id,
+                'label' => 'Lihat Bukti',
+                'sort' => 1,
+            ]);
         }
 
         return $pkkmYear;
