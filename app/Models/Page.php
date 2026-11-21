@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-#[Fillable(['title', 'slug', 'content', 'featured_image', 'is_published'])]
+#[Fillable(['title', 'slug', 'content', 'featured_image', 'header_image', 'is_published'])]
 class Page extends Model
 {
     /** @use HasFactory<PageFactory> */

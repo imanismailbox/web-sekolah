@@ -63,9 +63,9 @@
                                                         <span class="grid size-8 place-items-center rounded-full bg-brand-50 font-display text-sm font-semibold tabular-nums text-brand-800">{{ $indicator->number }}</span>
                                                         <div>
                                                             <p class="leading-relaxed text-ink">{{ $indicator->description }}</p>
-                                                            @if ($indicator->expected_evidence)
+                                                            {{-- @if ($indicator->expected_evidence)
                                                                 <p class="mt-2 text-sm text-muted"><span class="font-medium text-ink">Bukti yang diharapkan:</span> {{ $indicator->expected_evidence }}</p>
-                                                            @endif
+                                                            @endif --}}
                                                         </div>
                                                         <div class="col-start-2 md:col-start-auto">
                                                             @if ($indicator->evidence->isNotEmpty())

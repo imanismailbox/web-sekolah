@@ -1,6 +1,14 @@
-@props(['title', 'breadcrumbs' => [], 'lead' => null])
+@props(['title', 'breadcrumbs' => [], 'lead' => null, 'image' => null])
 {{-- $breadcrumbs: array label => url (url null untuk halaman aktif) --}}
+{{-- $image: path di disk public; kosong = gambar header dari Pengaturan Situs --}}
+@php
+    $headerImage = $image ?: app(\App\Settings\GeneralSettings::class)->page_header_image;
+@endphp
 <section class="relative overflow-hidden border-b-4 border-gold-400 bg-brand-700 text-white">
+    @if ($headerImage)
+        <img src="{{ Storage::disk('public')->url($headerImage) }}" alt="" aria-hidden="true" class="absolute inset-0 size-full object-cover" data-page-header-image>
+        <div class="absolute inset-0 bg-gradient-to-r from-brand-900/90 via-brand-800/80 to-brand-700/60" aria-hidden="true"></div>
+    @endif
     <div class="container-site relative py-10 md:py-14">
         <nav aria-label="Breadcrumb">
             <ol class="flex flex-wrap items-center gap-1.5 text-sm text-brand-100">

@@ -17,10 +17,10 @@
             <div class="flex snap-x snap-mandatory overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" data-slider-track>
                 @foreach ($slides as $slide)
                     <article class="relative w-full shrink-0 snap-start" aria-roledescription="slide" aria-label="{{ $loop->iteration }} dari {{ $loop->count }}">
-                        <img src="{{ Storage::disk('public')->url($slide->image) }}" alt="{{ $slide->title ?? '' }}" class="h-[22rem] w-full object-cover sm:h-[28rem] lg:h-[36rem]" @if (! $loop->first) loading="lazy" @endif>
+                        <img src="{{ Storage::disk('public')->url($slide->image) }}" alt="{{ $slide->title ?? '' }}" class="block h-auto w-full" @if (! $loop->first) loading="lazy" @endif>
                         @if ($slide->title || $slide->caption || ($slide->url && $slide->button_label))
-                            <div class="absolute inset-0 bg-[linear-gradient(to_top,rgb(3_42_21/0.88),rgb(3_42_21/0.35)_45%,transparent_75%)]"></div>
-                            <div class="container-site absolute inset-x-0 bottom-0 pb-28 sm:pb-32 lg:pb-36">
+                            <div class="absolute inset-0 bg-[linear-gradient(to_top,rgb(3_42_21/0.55),rgb(3_42_21/0.15)_40%,transparent_65%)]"></div>
+                            <div class="container-site absolute inset-x-0 bottom-0 pb-8 sm:pb-12 lg:pb-16">
                                 <div class="max-w-2xl text-white">
                                     @if ($slide->title)
                                         <h2 class="text-2xl font-semibold leading-tight tracking-tight sm:text-4xl lg:text-5xl">{{ $slide->title }}</h2>
@@ -39,7 +39,7 @@
             </div>
 
             @if ($slides->count() > 1)
-                <div class="container-site pointer-events-none absolute inset-x-0 bottom-16 flex items-center justify-between sm:bottom-20 lg:bottom-24">
+                <div class="container-site pointer-events-none absolute inset-x-0 bottom-3 flex items-center justify-between sm:bottom-4 lg:bottom-6">
                     <div class="pointer-events-auto flex gap-2">
                         @foreach ($slides as $slide)
                             <button type="button" class="h-1.5 w-6 rounded-full bg-white/40 transition-all aria-[current=true]:w-10 aria-[current=true]:bg-gold-400" data-slider-dot>
@@ -57,7 +57,7 @@
     @else
         <section class="relative overflow-hidden bg-brand-700 text-white">
             <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_85%_20%,rgb(255_255_255/0.14),transparent_55%),radial-gradient(ellipse_at_10%_110%,rgb(3_42_21/0.55),transparent_60%)]" aria-hidden="true"></div>
-            <div class="container-site relative grid items-center gap-10 pb-28 pt-16 sm:pt-20 lg:grid-cols-[minmax(0,1fr)_24rem] lg:pb-36 lg:pt-24">
+            <div class="container-site relative grid items-center gap-10 pb-16 pt-16 sm:pt-20 lg:grid-cols-[minmax(0,1fr)_24rem] lg:pb-24 lg:pt-24">
                 <div class="max-w-3xl">
                     <h1 class="text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl">{{ $settings->site_name }}</h1>
                     @if ($settings->tagline)
@@ -87,7 +87,7 @@
     {{-- Tautan cepat --}}
     <section aria-label="Tautan cepat" class="relative z-10">
         <div class="container-site">
-            <ul class="-mt-12 grid grid-cols-2 gap-3 sm:gap-4 lg:-mt-16 lg:grid-cols-4">
+            <ul class="mt-8 grid grid-cols-2 gap-3 sm:gap-4 lg:mt-12 lg:grid-cols-4">
                 @foreach ($quickLinks as $quickLink)
                     <li>
                         <a href="{{ $quickLink['route'] }}" class="card group flex h-full flex-col gap-3 p-4 transition-transform duration-200 hover:-translate-y-0.5 sm:flex-row sm:items-center sm:p-5">

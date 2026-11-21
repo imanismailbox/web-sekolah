@@ -141,6 +141,25 @@ class PublicPagesTest extends TestCase
         $this->get('/rahasia')->assertNotFound();
     }
 
+    public function test_page_header_uses_page_image_then_falls_back_to_site_setting(): void
+    {
+        Page::factory()->create(['slug' => 'polos']);
+        Page::factory()->create(['slug' => 'khusus', 'header_image' => 'pages/headers/khusus.jpg']);
+
+        $this->get('/polos')->assertOk()->assertDontSee('data-page-header-image', false);
+
+        $settings = app(GeneralSettings::class);
+        $settings->page_header_image = 'settings/header-umum.jpg';
+        $settings->save();
+
+        $this->get('/polos')->assertOk()->assertSee('settings/header-umum.jpg');
+        $this->get(route('staff.index'))->assertOk()->assertSee('settings/header-umum.jpg');
+        $this->get('/khusus')
+            ->assertOk()
+            ->assertSee('pages/headers/khusus.jpg')
+            ->assertDontSee('settings/header-umum.jpg');
+    }
+
     public function test_pkkm_index_and_detail_show_published_year_with_evidence(): void
     {
         $year = PkkmYear::factory()->create(['year' => 2025, 'slug' => 'pkkm-tahun-2025', 'title' => 'PKKM 2025']);

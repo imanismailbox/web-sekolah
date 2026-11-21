@@ -14,6 +14,8 @@ class GeneralSettings extends Settings
 
     public ?string $favicon;
 
+    public ?string $page_header_image;
+
     public ?string $address;
 
     public ?string $phone;

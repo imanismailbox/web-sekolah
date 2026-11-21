@@ -63,6 +63,15 @@ class ManageGeneralSettings extends SettingsPage
                                         ->disk('public')
                                         ->directory('settings'),
                                 ]),
+                                FileUpload::make('page_header_image')
+                                    ->label('Gambar Latar Header Halaman')
+                                    ->image()
+                                    ->imageEditor()
+                                    ->imageEditorAspectRatios(['4:1', '16:9'])
+                                    ->maxSize(4096)
+                                    ->disk('public')
+                                    ->directory('settings')
+                                    ->helperText('Tampil di bagian judul semua halaman. Gunakan gambar lebar (mis. 1920×480). Kosongkan untuk latar hijau polos.'),
                                 Textarea::make('footer_text')
                                     ->label('Teks Footer')
                                     ->rows(2),
