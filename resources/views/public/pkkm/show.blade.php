@@ -60,7 +60,7 @@
                                             <ol class="divide-y divide-line border-t border-line">
                                                 @foreach ($item->indicators as $indicator)
                                                     <li class="grid grid-cols-[2rem_minmax(0,1fr)] gap-x-3 gap-y-4 p-5 md:grid-cols-[2.5rem_minmax(0,1fr)_minmax(0,18rem)] md:gap-x-4">
-                                                        <span class="grid size-8 place-items-center rounded-full bg-brand-50 font-display text-sm font-semibold tabular-nums text-brand-800">{{ $indicator->number }}</span>
+                                                        <span class="grid size-8 place-items-center font-display text-sm font-semibold tabular-nums text-brand-800">{{ $item->code }}.{{ $indicator->number }}</span>
                                                         <div>
                                                             <p class="leading-relaxed text-ink">{{ $indicator->description }}</p>
                                                             {{-- @if ($indicator->expected_evidence)
