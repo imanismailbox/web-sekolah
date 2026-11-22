@@ -44,4 +44,42 @@ class AlbumResourceTest extends TestCase
         $this->assertSame([3, 4, 5], $album->photos()->pluck('sort')->all());
         Storage::disk('public')->assertExists($album->photos()->reorder()->latest('id')->value('image'));
     }
+
+    public function test_bulk_upload_accepts_images_and_mp4_videos(): void
+    {
+        Storage::fake('public');
+        $album = Album::factory()->create();
+
+        Livewire::test(PhotosRelationManager::class, ['ownerRecord' => $album, 'pageClass' => EditAlbum::class])
+            ->callTableAction('uploadPhotos', data: [
+                'images' => [
+                    UploadedFile::fake()->image('kegiatan.jpg'),
+                    UploadedFile::fake()->create('dokumentasi.mp4', 512, 'video/mp4'),
+                ],
+            ])
+            ->assertHasNoTableActionErrors();
+
+        $media = $album->photos()->get();
+        $this->assertCount(2, $media);
+        $this->assertFalse($media[0]->isVideo());
+        $this->assertTrue($media[1]->isVideo());
+        Storage::disk('public')->assertExists($media[0]->image);
+        Storage::disk('public')->assertExists($media[1]->image);
+    }
+
+    public function test_bulk_upload_rejects_unsupported_file_types(): void
+    {
+        Storage::fake('public');
+        $album = Album::factory()->create();
+
+        Livewire::test(PhotosRelationManager::class, ['ownerRecord' => $album, 'pageClass' => EditAlbum::class])
+            ->callTableAction('uploadPhotos', data: [
+                'images' => [
+                    UploadedFile::fake()->create('dokumen.pdf', 100, 'application/pdf'),
+                ],
+            ])
+            ->assertHasTableActionErrors();
+
+        $this->assertCount(0, $album->photos);
+    }
 }

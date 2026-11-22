@@ -32,4 +32,9 @@ class AlbumPhoto extends Model
     {
         return $this->belongsTo(Album::class);
     }
+
+    public function isVideo(): bool
+    {
+        return strtolower(pathinfo($this->image, PATHINFO_EXTENSION)) === 'mp4';
+    }
 }

@@ -1,9 +1,9 @@
 <x-public-layout title="Galeri" :description="$description">
-    <x-page-header title="Galeri Kegiatan" :breadcrumbs="['Galeri' => null]" lead="Dokumentasi foto kegiatan siswa, guru, dan madrasah." />
+    <x-page-header title="Galeri Kegiatan" :breadcrumbs="['Galeri' => null]" lead="Dokumentasi foto dan video kegiatan siswa, guru, dan madrasah." />
 
     <div class="container-site py-12 lg:py-16">
         @if ($albums->isEmpty())
-            <x-empty-state icon="images" title="Belum ada album" message="Foto kegiatan madrasah akan tampil di sini setelah diterbitkan." />
+            <x-empty-state icon="images" title="Belum ada album" message="Dokumentasi kegiatan madrasah akan tampil di sini setelah diterbitkan." />
         @else
             <h2 class="sr-only">Daftar album</h2>
             <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -17,7 +17,7 @@
                                     <span class="grid size-full place-items-center text-white/50"><x-site-icon name="images" class="size-12" /></span>
                                 @endif
                                 <span class="absolute right-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-brand-950/80 px-2.5 py-1 text-xs font-medium text-white">
-                                    <x-site-icon name="images" class="size-3.5" />{{ $album->photos_count }} foto
+                                    <x-site-icon name="images" class="size-3.5" />{{ $album->photos_count }} media
                                 </span>
                             </div>
                             <div class="p-5">

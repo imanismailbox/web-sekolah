@@ -123,15 +123,40 @@ function initLightbox() {
     }
 
     const image = dialog.querySelector('[data-lightbox-image]');
+    const video = dialog.querySelector('[data-lightbox-video]');
     const caption = dialog.querySelector('[data-lightbox-caption]');
     const counter = dialog.querySelector('[data-lightbox-counter]');
     let current = 0;
 
+    const stopVideo = () => {
+        if (!video) {
+            return;
+        }
+        video.pause();
+        video.removeAttribute('src');
+        video.load();
+    };
+
     const show = (index) => {
         current = (index + triggers.length) % triggers.length;
         const trigger = triggers[current];
-        image.src = trigger.getAttribute('href');
-        image.alt = trigger.dataset.caption || trigger.querySelector('img')?.alt || '';
+        const href = trigger.getAttribute('href');
+        const isVideo = trigger.dataset.mediaType === 'video';
+
+        if (isVideo && video) {
+            image.classList.add('hidden');
+            video.classList.remove('hidden');
+            video.src = href;
+            video.load();
+            video.play().catch(() => {});
+        } else {
+            stopVideo();
+            video?.classList.add('hidden');
+            image.classList.remove('hidden');
+            image.src = href;
+            image.alt = trigger.dataset.caption || trigger.querySelector('img')?.alt || '';
+        }
+
         caption.textContent = trigger.dataset.caption || '';
         counter.textContent = `${current + 1} / ${triggers.length}`;
     };
@@ -147,6 +172,7 @@ function initLightbox() {
     dialog.querySelector('[data-lightbox-prev]').addEventListener('click', () => show(current - 1));
     dialog.querySelector('[data-lightbox-next]').addEventListener('click', () => show(current + 1));
     dialog.querySelector('[data-lightbox-close]').addEventListener('click', () => dialog.close());
+    dialog.addEventListener('close', stopVideo);
     dialog.addEventListener('click', (event) => {
         if (event.target === dialog) {
             dialog.close();

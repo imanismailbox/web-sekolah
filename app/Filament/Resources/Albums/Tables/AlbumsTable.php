@@ -26,7 +26,7 @@ class AlbumsTable
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('photos_count')
-                    ->label('Jumlah Foto')
+                    ->label('Jumlah Media')
                     ->counts('photos'),
                 TextColumn::make('event_date')
                     ->label('Tanggal Kegiatan')

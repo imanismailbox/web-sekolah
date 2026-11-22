@@ -102,6 +102,7 @@ class PublicPagesTest extends TestCase
     {
         $album = Album::factory()->create(['title' => 'Album Pentas', 'slug' => 'album-pentas']);
         AlbumPhoto::factory()->create(['album_id' => $album->id, 'caption' => 'Foto Pembukaan']);
+        AlbumPhoto::factory()->video()->create(['album_id' => $album->id, 'caption' => 'Video Sambutan']);
         Album::factory()->create(['title' => 'Album Tersembunyi', 'slug' => 'album-tersembunyi', 'is_published' => false]);
 
         $this->get(route('albums.index'))
@@ -111,7 +112,12 @@ class PublicPagesTest extends TestCase
 
         $this->get(route('albums.show', 'album-pentas'))
             ->assertOk()
-            ->assertSee('Foto Pembukaan');
+            ->assertSee('Foto Pembukaan')
+            ->assertSee('Video Sambutan')
+            ->assertSee('1 foto · 1 video')
+            ->assertSee('data-media-type="image"', false)
+            ->assertSee('data-media-type="video"', false)
+            ->assertSee('data-lightbox-video', false);
 
         $this->get(route('albums.show', 'album-tersembunyi'))->assertNotFound();
     }

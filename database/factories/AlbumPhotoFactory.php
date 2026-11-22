@@ -25,4 +25,11 @@ class AlbumPhotoFactory extends Factory
             'sort' => 0,
         ];
     }
+
+    public function video(): static
+    {
+        return $this->state(fn (): array => [
+            'image' => 'albums/'.fake()->uuid().'.mp4',
+        ]);
+    }
 }

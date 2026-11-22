@@ -293,7 +293,7 @@
                                 <span class="absolute inset-0 bg-[linear-gradient(to_top,rgb(3_42_21/0.9),transparent_60%)]"></span>
                                 <span class="absolute inset-x-0 bottom-0 p-4 text-white">
                                     <span class="line-clamp-2 font-display text-sm font-semibold leading-snug sm:text-base">{{ $album->title }}</span>
-                                    <span class="mt-1 block text-xs text-brand-100">{{ $album->photos_count }} foto @if ($album->event_date) · {{ $album->event_date->translatedFormat('d M Y') }} @endif</span>
+                                    <span class="mt-1 block text-xs text-brand-100">{{ $album->photos_count }} media @if ($album->event_date) · {{ $album->event_date->translatedFormat('d M Y') }} @endif</span>
                                 </span>
                             </a>
                         </li>
