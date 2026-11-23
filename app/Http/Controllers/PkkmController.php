@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\EvidenceType;
+use App\Models\PkkmEvidence;
 use App\Models\PkkmYear;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class PkkmController extends Controller
 {
@@ -27,5 +32,27 @@ class PkkmController extends Controller
             'pkkmYear' => $pkkmYear,
             'description' => $pkkmYear->title,
         ]);
+    }
+
+    public function evidence(string $slug, PkkmEvidence $evidence): StreamedResponse
+    {
+        $belongsToPublishedYear = PkkmYear::query()
+            ->published()
+            ->where('slug', $slug)
+            ->whereHas('components.items.indicators.evidence', fn ($query) => $query->whereKey($evidence->getKey()))
+            ->exists();
+
+        abort_unless($belongsToPublishedYear, 404);
+        abort_unless($evidence->type === EvidenceType::File && filled($evidence->file_path), 404);
+        abort_unless(Storage::disk('public')->exists($evidence->file_path), 404);
+
+        $filename = Str::slug($evidence->label ?: 'bukti-pkkm').'.pdf';
+
+        return Storage::disk('public')->response(
+            $evidence->file_path,
+            $filename,
+            ['Content-Type' => 'application/pdf'],
+            'inline',
+        );
     }
 }

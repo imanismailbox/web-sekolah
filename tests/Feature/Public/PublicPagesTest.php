@@ -18,6 +18,7 @@ use App\Models\Slide;
 use App\Models\Staff;
 use App\Settings\GeneralSettings;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class PublicPagesTest extends TestCase
@@ -192,6 +193,61 @@ class PublicPagesTest extends TestCase
             ->assertSee('https://drive.example/rpp');
 
         $this->get(route('pkkm.show', 'pkkm-tahun-2019'))->assertNotFound();
+    }
+
+    public function test_pkkm_uploaded_pdf_evidence_opens_inline_and_renders_viewer_on_public_page(): void
+    {
+        Storage::fake('public');
+        Storage::disk('public')->put('pkkm/2025/sk-madrasah.pdf', '%PDF-1.4 fake pdf content');
+
+        $year = PkkmYear::factory()->create(['year' => 2025, 'slug' => 'pkkm-tahun-2025', 'title' => 'PKKM 2025']);
+        $component = PkkmComponent::factory()->create(['pkkm_year_id' => $year->id]);
+        $item = PkkmItem::factory()->create(['pkkm_component_id' => $component->id]);
+        $indicator = PkkmIndicator::factory()->create(['pkkm_item_id' => $item->id]);
+        $pdfEvidence = PkkmEvidence::factory()->create([
+            'pkkm_indicator_id' => $indicator->id,
+            'label' => 'SK Kepala Madrasah',
+            'type' => EvidenceType::File,
+            'url' => null,
+            'file_path' => 'pkkm/2025/sk-madrasah.pdf',
+        ]);
+        $linkEvidence = PkkmEvidence::factory()->create([
+            'pkkm_indicator_id' => $indicator->id,
+            'label' => 'Tautan Drive',
+            'type' => EvidenceType::Link,
+            'url' => 'https://drive.example/doc',
+            'file_path' => null,
+        ]);
+
+        $evidenceRoute = route('pkkm.evidence', ['slug' => $year->slug, 'evidence' => $pdfEvidence]);
+
+        $this->get(route('pkkm.show', $year->slug))
+            ->assertOk()
+            ->assertSee('data-pdf-viewer', false)
+            ->assertSee('data-pdf-viewer-trigger', false)
+            ->assertSee($evidenceRoute, false);
+
+        $response = $this->get($evidenceRoute)
+            ->assertOk()
+            ->assertHeader('Content-Type', 'application/pdf');
+
+        $this->assertStringStartsWith('inline;', (string) $response->headers->get('Content-Disposition'));
+
+        $this->get(route('pkkm.evidence', ['slug' => $year->slug, 'evidence' => $linkEvidence]))->assertNotFound();
+
+        $draftYear = PkkmYear::factory()->create(['year' => 2024, 'slug' => 'pkkm-tahun-2024', 'is_published' => false]);
+        $draftIndicator = PkkmIndicator::factory()
+            ->for(PkkmItem::factory()->for(PkkmComponent::factory()->for($draftYear, 'year'), 'component'), 'item')
+            ->create();
+        $draftEvidence = PkkmEvidence::factory()->create([
+            'pkkm_indicator_id' => $draftIndicator->id,
+            'type' => EvidenceType::File,
+            'url' => null,
+            'file_path' => 'pkkm/2025/sk-madrasah.pdf',
+        ]);
+
+        $this->get(route('pkkm.evidence', ['slug' => $draftYear->slug, 'evidence' => $draftEvidence]))->assertNotFound();
+        $this->get(route('pkkm.evidence', ['slug' => $year->slug, 'evidence' => $draftEvidence]))->assertNotFound();
     }
 
     public function test_contact_page_shows_settings_and_whatsapp_link(): void

@@ -14,6 +14,8 @@ use Database\Seeders\RolePermissionSeeder;
 use Filament\Actions\Testing\TestAction;
 use Filament\Forms\Components\Repeater;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -131,6 +133,56 @@ class PkkmYearResourceTest extends TestCase
                 ]],
             ])
             ->assertHasActionErrors(['items.0.indicators.0.evidence.0.url' => 'url']);
+    }
+
+    public function test_file_evidence_accepts_pdf_and_rejects_non_pdf_files(): void
+    {
+        Storage::fake('public');
+        Repeater::fake();
+        $year = PkkmYear::factory()->create(['year' => 2025]);
+
+        Livewire::test(ComponentsRelationManager::class, ['ownerRecord' => $year, 'pageClass' => EditPkkmYear::class])
+            ->callAction(TestAction::make('create')->table(), data: [
+                'code' => 'A',
+                'name' => 'Komponen PDF',
+                'items' => [[
+                    'code' => '1.1',
+                    'name' => 'Unsur',
+                    'indicators' => [[
+                        'description' => 'Indikator',
+                        'evidence' => [[
+                            'label' => 'SK Kepala Madrasah',
+                            'type' => EvidenceType::File->value,
+                            'file_path' => [UploadedFile::fake()->create('sk.pdf', 100, 'application/pdf')],
+                        ]],
+                    ]],
+                ]],
+            ])
+            ->assertHasNoActionErrors();
+
+        $evidence = $year->components()->sole()->items()->sole()->indicators()->sole()->evidence()->sole();
+        $this->assertSame(EvidenceType::File, $evidence->type);
+        $this->assertNotNull($evidence->file_path);
+        Storage::disk('public')->assertExists($evidence->file_path);
+
+        Livewire::test(ComponentsRelationManager::class, ['ownerRecord' => $year, 'pageClass' => EditPkkmYear::class])
+            ->callAction(TestAction::make('create')->table(), data: [
+                'code' => 'B',
+                'name' => 'Komponen Gambar',
+                'items' => [[
+                    'code' => '2.1',
+                    'name' => 'Unsur',
+                    'indicators' => [[
+                        'description' => 'Indikator',
+                        'evidence' => [[
+                            'label' => 'Foto Kegiatan',
+                            'type' => EvidenceType::File->value,
+                            'file_path' => [UploadedFile::fake()->image('foto.png')],
+                        ]],
+                    ]],
+                ]],
+            ])
+            ->assertHasActionErrors(['items.0.indicators.0.evidence.0.file_path']);
     }
 
     public function test_edit_page_renders_for_seeded_template(): void

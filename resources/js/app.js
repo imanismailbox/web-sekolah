@@ -188,6 +188,47 @@ function initLightbox() {
     });
 }
 
+/**
+ * Penampil PDF bukti PKKM memakai <dialog> native.
+ */
+function initPdfViewer() {
+    const dialog = document.querySelector('[data-pdf-viewer]');
+    const triggers = Array.from(document.querySelectorAll('[data-pdf-viewer-trigger]'));
+
+    if (!dialog || triggers.length === 0) {
+        return;
+    }
+
+    const frame = dialog.querySelector('[data-pdf-viewer-frame]');
+    const title = dialog.querySelector('[data-pdf-viewer-title]');
+    const openLink = dialog.querySelector('[data-pdf-viewer-open]');
+
+    triggers.forEach((trigger) =>
+        trigger.addEventListener('click', (event) => {
+            event.preventDefault();
+            const url = trigger.getAttribute('href');
+            const label = trigger.dataset.pdfTitle || 'Dokumen PDF';
+
+            title.textContent = label;
+            frame.title = label;
+            frame.src = url;
+            openLink.href = url;
+            dialog.showModal();
+        }),
+    );
+
+    dialog.querySelector('[data-pdf-viewer-close]').addEventListener('click', () => dialog.close());
+    dialog.addEventListener('click', (event) => {
+        if (event.target === dialog) {
+            dialog.close();
+        }
+    });
+    dialog.addEventListener('close', () => {
+        frame.src = 'about:blank';
+    });
+}
+
 initMobileMenu();
 initSliders();
 initLightbox();
+initPdfViewer();

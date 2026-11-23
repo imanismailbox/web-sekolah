@@ -73,17 +73,29 @@
                                                                     @foreach ($indicator->evidence as $evidence)
                                                                         @php
                                                                             $isFile = $evidence->type === \App\Enums\EvidenceType::File;
-                                                                            $evidenceUrl = $evidence->href();
+                                                                            $evidenceUrl = $isFile && $evidence->isFilled()
+                                                                                ? route('pkkm.evidence', ['slug' => $pkkmYear->slug, 'evidence' => $evidence])
+                                                                                : $evidence->href();
                                                                         @endphp
                                                                         <li>
                                                                             @if ($evidenceUrl)
-                                                                                <a href="{{ $evidenceUrl }}" target="_blank" rel="noopener noreferrer" class="flex items-start gap-2.5 rounded-lg border border-line px-3 py-2 text-sm transition-colors hover:border-brand-300 hover:bg-brand-50">
+                                                                                <a
+                                                                                    href="{{ $evidenceUrl }}"
+                                                                                    @if ($isFile)
+                                                                                        data-pdf-viewer-trigger
+                                                                                        data-pdf-title="{{ $evidence->label }}"
+                                                                                    @else
+                                                                                        target="_blank"
+                                                                                        rel="noopener noreferrer"
+                                                                                    @endif
+                                                                                    class="flex items-start gap-2.5 rounded-lg border border-line px-3 py-2 text-sm transition-colors hover:border-brand-300 hover:bg-brand-50"
+                                                                                >
                                                                                     <x-site-icon :name="$isFile ? 'file-text' : 'link'" class="mt-0.5 size-4 text-brand-600" />
                                                                                     <span class="min-w-0 flex-1">
                                                                                         <span class="block font-medium text-ink">{{ $evidence->label }}</span>
-                                                                                        <span class="block text-xs text-muted">{{ $isFile ? 'Berkas' : 'Tautan' }}</span>
+                                                                                        <span class="block text-xs text-muted">{{ $isFile ? 'PDF' : 'Tautan' }}</span>
                                                                                     </span>
-                                                                                    <x-site-icon :name="$isFile ? 'download' : 'external-link'" class="mt-0.5 size-4 text-muted" />
+                                                                                    <x-site-icon :name="$isFile ? 'eye' : 'external-link'" class="mt-0.5 size-4 text-muted" />
                                                                                 </a>
                                                                             @else
                                                                                 <span class="flex items-start gap-2.5 rounded-lg border border-dashed border-line px-3 py-2 text-sm text-muted">
@@ -113,6 +125,30 @@
                     @endforeach
                 </div>
             </div>
+
+            <dialog class="m-auto size-full max-h-none max-w-none bg-transparent p-0 backdrop:bg-brand-950/90 sm:p-6" data-pdf-viewer aria-label="Penampil dokumen PDF">
+                <div class="mx-auto flex size-full max-w-6xl flex-col overflow-hidden bg-white shadow-2xl sm:rounded-2xl">
+                    <div class="flex items-center justify-between gap-4 border-b border-line bg-brand-900 px-4 py-3 text-white sm:px-5">
+                        <div class="flex min-w-0 items-center gap-2.5">
+                            <x-site-icon name="file-text" class="size-5 shrink-0 text-gold-400" />
+                            <p class="truncate font-display text-sm font-semibold" data-pdf-viewer-title></p>
+                        </div>
+                        <div class="flex shrink-0 items-center gap-2">
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-white/20" data-pdf-viewer-open>
+                                <x-site-icon name="external-link" class="size-3.5" />
+                                <span class="hidden sm:inline">Tab baru</span>
+                            </a>
+                            <button type="button" class="grid size-9 place-items-center rounded-full bg-white/10 transition-colors hover:bg-white/20" data-pdf-viewer-close>
+                                <x-site-icon name="x" class="size-5" />
+                                <span class="sr-only">Tutup</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="relative min-h-0 flex-1 bg-paper">
+                        <iframe class="size-full border-0 bg-white" title="Pratinjau dokumen PDF" data-pdf-viewer-frame></iframe>
+                    </div>
+                </div>
+            </dialog>
         @endif
     </div>
 </x-public-layout>
