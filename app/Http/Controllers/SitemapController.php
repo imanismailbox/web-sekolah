@@ -19,6 +19,7 @@ class SitemapController extends Controller
             ['loc' => route('albums.index'), 'lastmod' => null],
             ['loc' => route('staff.index'), 'lastmod' => null],
             ['loc' => route('pkkm.index'), 'lastmod' => null],
+            ['loc' => route('complaints.create'), 'lastmod' => null],
             ['loc' => route('contact'), 'lastmod' => null],
         ];
 

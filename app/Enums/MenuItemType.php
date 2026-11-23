@@ -93,6 +93,7 @@ enum MenuItemType: string implements HasLabel
             'albums.index' => 'Galeri',
             'staff.index' => 'Guru & Pegawai',
             'pkkm.index' => 'PKKM',
+            'complaints.create' => 'Aduan & Saran',
             'contact' => 'Kontak',
         ];
     }

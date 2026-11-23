@@ -56,6 +56,12 @@
                     @if ($whatsappNumber)
                         <a href="https://wa.me/{{ $whatsappNumber }}" target="_blank" rel="noopener noreferrer" class="btn-primary w-full self-start py-3.5 text-base"><x-site-icon name="message-circle" />Chat lewat WhatsApp</a>
                     @endif
+
+                    <div class="card p-5">
+                        <h2 class="font-display text-sm font-semibold text-brand-900">Aduan, Kritik &amp; Saran</h2>
+                        <p class="mt-1.5 text-sm text-muted">Sampaikan masukan atau laporan Anda secara langsung melalui formulir resmi madrasah.</p>
+                        <a href="{{ route('complaints.create') }}" class="link-arrow mt-3">Isi Formulir Aduan <x-site-icon name="arrow-right" class="size-4" /></a>
+                    </div>
                 </div>
 
                 @if ($settings->maps_embed)

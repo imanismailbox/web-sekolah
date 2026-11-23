@@ -37,6 +37,7 @@ class AdminPanelAccessTest extends TestCase
             'albums create' => ['/kelola-portal-madrasah/albums/create', ['admin', 'editor']],
             'staff' => ['/kelola-portal-madrasah/staff', ['admin']],
             'staff create' => ['/kelola-portal-madrasah/staff/create', ['admin']],
+            'complaints' => ['/kelola-portal-madrasah/complaints', ['admin']],
             'pkkm' => ['/kelola-portal-madrasah/pkkm-years', ['admin', 'editor_pkkm']],
             'pkkm create' => ['/kelola-portal-madrasah/pkkm-years/create', ['admin', 'editor_pkkm']],
             'menu' => ['/kelola-portal-madrasah/menu-items', ['admin']],

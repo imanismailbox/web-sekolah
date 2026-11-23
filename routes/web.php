@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AlbumController;
+use App\Http\Controllers\ComplaintController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PkkmController;
@@ -22,8 +23,14 @@ Route::get('/guru', StaffController::class)->name('staff.index');
 
 Route::get('/pkkm', [PkkmController::class, 'index'])->name('pkkm.index');
 Route::get('/pkkm/{slug}', [PkkmController::class, 'show'])->name('pkkm.show');
+Route::get('/pkkm/{slug}/bukti/{evidence}', [PkkmController::class, 'evidence'])->name('pkkm.evidence');
 
 Route::view('/kontak', 'public.contact')->name('contact');
+
+Route::get('/aduan', [ComplaintController::class, 'create'])->name('complaints.create');
+Route::post('/aduan', [ComplaintController::class, 'store'])
+    ->middleware('throttle:5,1')
+    ->name('complaints.store');
 
 Route::get('/sitemap.xml', SitemapController::class)->name('sitemap');
 

@@ -212,6 +212,7 @@
                 <h2 class="font-display text-sm font-semibold text-white">Transparansi</h2>
                 <ul class="mt-4 space-y-2.5 text-sm">
                     <li><a href="{{ route('pkkm.index') }}" class="hover:text-white">Penilaian Kinerja Kepala Madrasah</a></li>
+                    <li><a href="{{ route('complaints.create') }}" class="hover:text-white">Aduan &amp; Saran</a></li>
                     <li><a href="{{ route('sitemap') }}" class="hover:text-white">Peta situs</a></li>
                 </ul>
             </div>

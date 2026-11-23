@@ -44,6 +44,7 @@ class PublicLayoutComposer
                 'Galeri' => route('albums.index'),
                 'Guru & Pegawai' => route('staff.index'),
                 'PKKM' => route('pkkm.index'),
+                'Aduan' => route('complaints.create'),
                 'Kontak' => route('contact'),
             ])->map(fn (string $url, string $label): array => [
                 'label' => $label,
