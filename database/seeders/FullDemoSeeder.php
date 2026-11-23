@@ -49,6 +49,8 @@ class FullDemoSeeder extends Seeder
         $this->seedStaff();
         $pkkmYear = $this->seedPkkmIndicators();
         $this->seedMenu($pages, $pkkmYear);
+
+        $this->call(VisitorLogSeeder::class);
     }
 
     private function seedEditorUsers(): void
