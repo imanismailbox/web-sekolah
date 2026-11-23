@@ -239,6 +239,42 @@
                 @elseif (! $socialLinks)
                     <p class="mt-4 text-sm">Hubungi kami lewat halaman <a href="{{ route('contact') }}" class="text-white underline">Kontak</a>.</p>
                 @endif
+
+                <section aria-label="Statistik pengunjung" class="mt-6 border-t border-white/10 pt-5">
+                    <h3 class="flex items-center gap-2 font-display text-sm font-semibold text-white">
+                        <x-site-icon name="bar-chart" class="size-4 text-gold-400" />
+                        <span>Statistik Pengunjung</span>
+                    </h3>
+                    <dl class="mt-3 grid grid-cols-4 gap-1.5 text-center">
+                        <div class="rounded-lg bg-white/5 px-1.5 py-2 ring-1 ring-white/10">
+                            <dt class="flex items-center justify-center gap-1 whitespace-nowrap text-[10px] text-brand-200">
+                                <span class="size-1.5 shrink-0 rounded-full bg-brand-400 motion-safe:animate-pulse" aria-hidden="true"></span>
+                                Online
+                            </dt>
+                            <dd class="mt-1 font-display text-sm font-semibold tabular-nums text-white" data-visitor-stat="online">
+                                {{ number_format($visitorStats['online'], 0, ',', '.') }}
+                            </dd>
+                        </div>
+                        <div class="rounded-lg bg-white/5 px-1.5 py-2 ring-1 ring-white/10">
+                            <dt class="whitespace-nowrap text-[10px] text-brand-200">Hari Ini</dt>
+                            <dd class="mt-1 font-display text-sm font-semibold tabular-nums text-white" data-visitor-stat="today">
+                                {{ number_format($visitorStats['today'], 0, ',', '.') }}
+                            </dd>
+                        </div>
+                        <div class="rounded-lg bg-white/5 px-1.5 py-2 ring-1 ring-white/10">
+                            <dt class="whitespace-nowrap text-[10px] text-brand-200">Bulan Ini</dt>
+                            <dd class="mt-1 font-display text-sm font-semibold tabular-nums text-white" data-visitor-stat="month">
+                                {{ number_format($visitorStats['month'], 0, ',', '.') }}
+                            </dd>
+                        </div>
+                        <div class="rounded-lg bg-white/5 px-1.5 py-2 ring-1 ring-white/10">
+                            <dt class="whitespace-nowrap text-[10px] text-brand-200">Total</dt>
+                            <dd class="mt-1 font-display text-sm font-semibold tabular-nums text-white" data-visitor-stat="total">
+                                {{ number_format($visitorStats['total'], 0, ',', '.') }}
+                            </dd>
+                        </div>
+                    </dl>
+                </section>
             </div>
         </div>
 

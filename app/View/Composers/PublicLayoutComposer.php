@@ -4,13 +4,17 @@ namespace App\View\Composers;
 
 use App\Models\MenuItem;
 use App\Models\Post;
+use App\Services\VisitorStatistics;
 use App\Settings\GeneralSettings;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class PublicLayoutComposer
 {
-    public function __construct(private GeneralSettings $settings) {}
+    public function __construct(
+        private GeneralSettings $settings,
+        private VisitorStatistics $visitorStatistics,
+    ) {}
 
     public function compose(View $view): void
     {
@@ -25,6 +29,7 @@ class PublicLayoutComposer
                 'youtube' => $this->settings->youtube,
                 'tiktok' => $this->settings->tiktok,
             ]),
+            'visitorStats' => $this->visitorStatistics->summary(),
         ]);
     }
 
