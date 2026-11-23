@@ -82,4 +82,60 @@ class PublicLayoutTest extends TestCase
             ->assertOk()
             ->assertSee('href="'.route('home').'"', false);
     }
+
+    public function test_header_and_footer_render_only_logo_image_when_logo_is_set(): void
+    {
+        $settings = app(GeneralSettings::class);
+        $settings->site_name = 'MI Contoh';
+        $settings->tagline = 'Madrasah Unggul Berprestasi';
+        $settings->logo = 'settings/logo-memanjang.png';
+        $settings->save();
+
+        $response = $this->get(route('home'))->assertOk();
+        $html = $response->getContent();
+
+        preg_match('/<header\b.*?<\/header>/s', $html, $headerMatch);
+        preg_match('/<footer\b.*?<\/footer>/s', $html, $footerMatch);
+
+        $this->assertNotEmpty($headerMatch[0]);
+        $this->assertNotEmpty($footerMatch[0]);
+
+        $this->assertStringContainsString('settings/logo-memanjang.png', $headerMatch[0]);
+        $this->assertStringContainsString('alt="MI Contoh"', $headerMatch[0]);
+        $this->assertStringNotContainsString('Kementerian Agama Republik Indonesia', $headerMatch[0]);
+        $this->assertStringNotContainsString('Madrasah Unggul Berprestasi', $headerMatch[0]);
+        $this->assertStringNotContainsString('logo-kemenag.png', $headerMatch[0]);
+
+        $this->assertStringContainsString('settings/logo-memanjang.png', $footerMatch[0]);
+        $this->assertStringContainsString('alt="MI Contoh"', $footerMatch[0]);
+        $this->assertStringNotContainsString('Madrasah Unggul Berprestasi', $footerMatch[0]);
+        $this->assertStringNotContainsString('logo-kemenag.png', $footerMatch[0]);
+    }
+
+    public function test_header_and_footer_fallback_to_kemenag_logo_and_text_when_logo_is_empty(): void
+    {
+        $settings = app(GeneralSettings::class);
+        $settings->site_name = 'MI Contoh';
+        $settings->tagline = 'Madrasah Unggul Berprestasi';
+        $settings->logo = null;
+        $settings->save();
+
+        $response = $this->get(route('home'))->assertOk();
+        $html = $response->getContent();
+
+        preg_match('/<header\b.*?<\/header>/s', $html, $headerMatch);
+        preg_match('/<footer\b.*?<\/footer>/s', $html, $footerMatch);
+
+        $this->assertNotEmpty($headerMatch[0]);
+        $this->assertNotEmpty($footerMatch[0]);
+
+        $this->assertStringContainsString('logo-kemenag.png', $headerMatch[0]);
+        $this->assertStringContainsString('Kementerian Agama Republik Indonesia', $headerMatch[0]);
+        $this->assertStringContainsString('MI Contoh', $headerMatch[0]);
+        $this->assertStringContainsString('Madrasah Unggul Berprestasi', $headerMatch[0]);
+
+        $this->assertStringContainsString('logo-kemenag.png', $footerMatch[0]);
+        $this->assertStringContainsString('MI Contoh', $footerMatch[0]);
+        $this->assertStringContainsString('Madrasah Unggul Berprestasi', $footerMatch[0]);
+    }
 }

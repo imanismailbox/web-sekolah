@@ -4,7 +4,6 @@
     $pageTitle = $title ? $title.' | '.$settings->site_name : $settings->site_name.($settings->tagline ? ' | '.$settings->tagline : '');
     $pageDescription = \Illuminate\Support\Str::limit(strip_tags($description ?: ($settings->tagline ?? $settings->site_name)), 160);
     $isActive = fn (string $url): bool => $url === $currentUrl || ($url !== url('/') && $url !== '#' && str_starts_with($currentUrl, rtrim($url, '/').'/'));
-    $initials = collect(preg_split('/\s+/', trim($settings->site_name)))->filter()->take(2)->map(fn ($word) => mb_strtoupper(mb_substr($word, 0, 1)))->implode('');
     $whatsappNumber = $settings->whatsappNumber();
 @endphp
 <!DOCTYPE html>
@@ -78,17 +77,17 @@
         <div class="container-site flex h-[4.5rem] items-center justify-between gap-6">
             <a href="{{ route('home') }}" class="flex min-w-0 items-center gap-3">
                 @if ($logoUrl)
-                    <img src="{{ $logoUrl }}" alt="Logo {{ $settings->site_name }}" class="size-12 shrink-0 object-contain">
+                    <img src="{{ $logoUrl }}" alt="{{ $settings->site_name }}" class="h-11 w-auto max-w-full object-contain object-left sm:h-12 lg:max-w-xs">
                 @else
-                    <span class="grid size-12 shrink-0 place-items-center rounded-full bg-white font-display text-base font-bold text-brand-800 ring-2 ring-gold-400 ring-offset-2 ring-offset-brand-800" aria-hidden="true">{{ $initials }}</span>
+                    <img src="{{ asset('logo-kemenag.png') }}" alt="Logo {{ $settings->site_name }}" class="size-12 shrink-0 object-contain">
+                    <span class="min-w-0">
+                        <span class="block text-[0.6875rem] font-medium uppercase tracking-wide text-gold-300"><span class="sm:hidden">Kementerian Agama RI</span><span class="hidden sm:inline">Kementerian Agama Republik Indonesia</span></span>
+                        <span class="block truncate font-display text-base font-semibold leading-tight sm:text-lg">{{ $settings->site_name }}</span>
+                        @if ($settings->tagline)
+                            <span class="hidden truncate text-xs text-brand-100/90 sm:block">{{ $settings->tagline }}</span>
+                        @endif
+                    </span>
                 @endif
-                <span class="min-w-0">
-                    <span class="block text-[0.6875rem] font-medium uppercase tracking-wide text-gold-300"><span class="sm:hidden">Kementerian Agama RI</span><span class="hidden sm:inline">Kementerian Agama Republik Indonesia</span></span>
-                    <span class="block truncate font-display text-base font-semibold leading-tight sm:text-lg">{{ $settings->site_name }}</span>
-                    @if ($settings->tagline)
-                        <span class="hidden truncate text-xs text-brand-100/90 sm:block">{{ $settings->tagline }}</span>
-                    @endif
-                </span>
             </a>
 
             <nav aria-label="Navigasi utama" class="hidden lg:block">
@@ -174,16 +173,18 @@
     <footer class="mt-auto bg-brand-900 text-brand-100">
         <div class="container-site grid gap-10 py-14 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
             <div>
-                <div class="flex items-center gap-3">
-                    @if ($logoUrl)
-                        <img src="{{ $logoUrl }}" alt="" class="size-12 object-contain">
-                    @else
-                        <span class="grid size-12 place-items-center rounded-full bg-white font-display text-base font-bold text-brand-800" aria-hidden="true">{{ $initials }}</span>
+                @if ($logoUrl)
+                    <a href="{{ route('home') }}" class="inline-block max-w-full">
+                        <img src="{{ $logoUrl }}" alt="{{ $settings->site_name }}" class="h-12 w-auto max-w-full object-contain object-left sm:h-14">
+                    </a>
+                @else
+                    <div class="flex items-center gap-3">
+                        <img src="{{ asset('logo-kemenag.png') }}" alt="" class="size-12 shrink-0 object-contain">
+                        <p class="font-display text-lg font-semibold leading-tight text-white">{{ $settings->site_name }}</p>
+                    </div>
+                    @if ($settings->tagline)
+                        <p class="mt-4 max-w-sm text-sm leading-relaxed">{{ $settings->tagline }}</p>
                     @endif
-                    <p class="font-display text-lg font-semibold leading-tight text-white">{{ $settings->site_name }}</p>
-                </div>
-                @if ($settings->tagline)
-                    <p class="mt-4 max-w-sm text-sm leading-relaxed">{{ $settings->tagline }}</p>
                 @endif
                 <ul class="mt-5 space-y-3 text-sm">
                     @if ($settings->address)
