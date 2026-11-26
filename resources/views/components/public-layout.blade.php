@@ -75,7 +75,7 @@
     {{-- Header --}}
     <header class="sticky top-0 z-40 bg-brand-800 text-white shadow-[0_6px_20px_-10px_rgb(3_42_21/0.6)]" data-site-header>
         <div class="container-site flex h-[4.5rem] items-center justify-between gap-6">
-            <a href="{{ route('home') }}" class="flex min-w-0 items-center gap-3">
+            <a href="{{ route('home') }}" class="flex min-w-0 items-center gap-3 lg:max-w-sm lg:shrink-0">
                 @if ($logoUrl)
                     <img src="{{ $logoUrl }}" alt="{{ $settings->site_name }}" class="h-11 w-auto max-w-full object-contain object-left sm:h-12 lg:max-w-xs">
                 @else
@@ -90,17 +90,17 @@
                 @endif
             </a>
 
-            <nav aria-label="Navigasi utama" class="hidden lg:block">
-                <ul class="flex items-center gap-1">
+            <nav aria-label="Navigasi utama" class="hidden min-w-0 flex-1 justify-end lg:flex" data-priority-nav>
+                <ul class="flex items-center justify-end gap-1" data-priority-nav-list>
                     @foreach ($navigation as $item)
                         @php
                             $active = $isActive($item['url']) || collect($item['children'])->contains(fn ($child) => $isActive($child['url']));
                         @endphp
-                        <li class="group relative">
+                        <li class="group relative shrink-0" data-priority-nav-item data-priority-nav-active="{{ $active ? 'true' : 'false' }}">
                             <a href="{{ $item['url'] }}"
                                 @if ($item['newTab']) target="_blank" rel="noopener noreferrer" @endif
                                 @if ($isActive($item['url'])) aria-current="page" @endif
-                                class="relative flex items-center gap-1 rounded-full px-3.5 py-2 font-display text-sm font-medium transition-colors hover:bg-white/10 {{ $active ? 'bg-white/10 text-white' : 'text-white/85' }}">
+                                class="relative flex items-center gap-1 whitespace-nowrap rounded-full px-3.5 py-2 font-display text-sm font-medium transition-colors hover:bg-white/10 {{ $active ? 'bg-white/10 text-white' : 'text-white/85' }}">
                                 {{ $item['label'] }}
                                 @if ($item['children'])
                                     <x-site-icon name="chevron-down" class="size-4 transition-transform group-hover:rotate-180 group-focus-within:rotate-180" />
@@ -125,6 +125,46 @@
                             @endif
                         </li>
                     @endforeach
+
+                    {{-- Dropdown otomatis untuk menu yang tidak muat di baris navigasi --}}
+                    <li class="group relative hidden shrink-0" data-priority-nav-more>
+                        <button type="button"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                            data-priority-nav-more-button
+                            class="relative flex cursor-pointer items-center gap-1 whitespace-nowrap rounded-full px-3.5 py-2 font-display text-sm font-medium text-white/85 transition-colors hover:bg-white/10 hover:text-white">
+                            Lainnya
+                            <x-site-icon name="chevron-down" class="size-4 transition-transform group-hover:rotate-180 group-focus-within:rotate-180" />
+                        </button>
+                        <div class="invisible absolute right-0 top-full z-30 pt-2 opacity-0 transition duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100" data-priority-nav-more-panel>
+                            <ul class="max-h-[calc(100dvh-6rem)] w-64 overflow-y-auto rounded-xl bg-white p-2 text-ink shadow-[0_18px_40px_-16px_rgb(3_42_21/0.45)]" data-priority-nav-overflow>
+                                @foreach ($navigation as $item)
+                                    <li class="hidden" data-priority-nav-overflow-item>
+                                        <a href="{{ $item['url'] }}"
+                                            @if ($item['newTab']) target="_blank" rel="noopener noreferrer" @endif
+                                            @if ($isActive($item['url'])) aria-current="page" @endif
+                                            class="block rounded-lg px-3 py-2 text-sm hover:bg-brand-50 hover:text-brand-800 {{ $isActive($item['url']) ? 'bg-brand-50 font-semibold text-brand-800' : ($item['children'] ? 'font-semibold text-brand-900' : '') }}">
+                                            {{ $item['label'] }}
+                                        </a>
+                                        @if ($item['children'])
+                                            <ul class="mb-1 ml-3 mt-0.5 space-y-0.5 border-l-2 border-brand-100 pl-2">
+                                                @foreach ($item['children'] as $child)
+                                                    <li>
+                                                        <a href="{{ $child['url'] }}"
+                                                            @if ($child['newTab']) target="_blank" rel="noopener noreferrer" @endif
+                                                            @if ($isActive($child['url'])) aria-current="page" @endif
+                                                            class="block rounded-lg px-2.5 py-1.5 text-sm hover:bg-brand-50 hover:text-brand-800 {{ $isActive($child['url']) ? 'bg-brand-50 font-semibold text-brand-800' : 'text-muted' }}">
+                                                            {{ $child['label'] }}
+                                                        </a>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        @endif
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </li>
                 </ul>
             </nav>
 

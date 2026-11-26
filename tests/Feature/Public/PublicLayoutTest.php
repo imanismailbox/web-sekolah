@@ -138,4 +138,28 @@ class PublicLayoutTest extends TestCase
         $this->assertStringContainsString('MI Contoh', $footerMatch[0]);
         $this->assertStringContainsString('Madrasah Unggul Berprestasi', $footerMatch[0]);
     }
+
+    public function test_desktop_navigation_renders_priority_overflow_dropdown_markup(): void
+    {
+        $parent = MenuItem::factory()->create([
+            'label' => 'Kurikulum',
+            'type' => MenuItemType::None,
+            'sort' => 1,
+        ]);
+        MenuItem::factory()->for($parent, 'parent')->create([
+            'label' => 'Kalender Akademik',
+            'type' => MenuItemType::Url,
+            'url' => 'https://kalender.example',
+        ]);
+
+        $response = $this->get(route('home'))->assertOk();
+        $html = $response->getContent();
+
+        $this->assertStringContainsString('data-priority-nav', $html);
+        $this->assertStringContainsString('data-priority-nav-more', $html);
+        $this->assertStringContainsString('data-priority-nav-overflow-item', $html);
+        $this->assertStringContainsString('Lainnya', $html);
+        $this->assertStringContainsString('Kurikulum', $html);
+        $this->assertStringContainsString('Kalender Akademik', $html);
+    }
 }
