@@ -28,27 +28,26 @@ class StaffImporterTest extends TestCase
     public function test_imports_teachers_and_employees_from_type_labels(): void
     {
         StaffImporter::test()
-            ->import(['name' => 'Ahmad Fauzi, S.Pd', 'type' => 'Guru', 'subject' => 'Matematika', 'is_active' => '1'])
+            ->import(['name' => 'Ahmad Fauzi, S.Pd', 'type' => 'Guru', 'subject' => 'Matematika'])
             ->assertImported();
 
         StaffImporter::test()
-            ->import(['name' => 'Siti Aminah', 'type' => 'karyawan', 'position' => 'Tata Usaha', 'is_active' => '1'])
+            ->import(['name' => 'Siti Aminah', 'type' => 'karyawan'])
             ->assertImported();
 
         $this->assertSame(StaffType::Teacher, Staff::where('name', 'Ahmad Fauzi, S.Pd')->sole()->type);
         $this->assertSame(StaffType::Employee, Staff::where('name', 'Siti Aminah')->sole()->type);
     }
 
-    public function test_reimport_with_same_nip_updates_existing_staff(): void
+    public function test_imported_staff_is_active_by_default_and_blank_subject_is_null(): void
     {
-        $staff = Staff::factory()->create(['nip' => '198001012005011001', 'name' => 'Nama Lama', 'type' => StaffType::Teacher]);
-
         StaffImporter::test()
-            ->import(['name' => 'Nama Baru', 'type' => 'guru', 'nip' => '198001012005011001'])
+            ->import(['name' => 'Dewi Lestari', 'type' => 'pegawai', 'subject' => ''])
             ->assertImported();
 
-        $this->assertSame(1, Staff::count());
-        $this->assertSame('Nama Baru', $staff->refresh()->name);
+        $staff = Staff::where('name', 'Dewi Lestari')->sole();
+        $this->assertTrue($staff->is_active);
+        $this->assertNull($staff->subject);
     }
 
     public function test_rejects_unknown_type_without_creating_staff(): void

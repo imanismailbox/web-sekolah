@@ -17,7 +17,7 @@ class StaffImporter extends Importer
     {
         return [
             ImportColumn::make('name')
-                ->label('Nama Lengkap')
+                ->label('Nama')
                 ->requiredMapping()
                 ->rules(['required', 'max:255']),
             ImportColumn::make('type')
@@ -30,41 +30,25 @@ class StaffImporter extends Importer
                     default => $state,
                 })
                 ->rules(['required', Rule::enum(StaffType::class)]),
-            ImportColumn::make('position')
-                ->label('Jabatan')
-                ->rules(['max:255']),
             ImportColumn::make('subject')
-                ->label('Mata Pelajaran')
-                ->rules(['max:255']),
-            ImportColumn::make('education')
-                ->label('Pendidikan Terakhir')
-                ->rules(['max:255']),
-            ImportColumn::make('nip')
-                ->label('NIP')
-                ->rules(['max:30']),
-            ImportColumn::make('nuptk')
-                ->label('NUPTK')
-                ->rules(['max:30']),
-            ImportColumn::make('email')
-                ->label('Email')
-                ->rules(['email', 'max:255']),
-            ImportColumn::make('phone')
-                ->label('Telepon')
-                ->rules(['max:255']),
-            ImportColumn::make('is_active')
-                ->label('Aktif')
-                ->boolean(),
+                ->label('Mapel')
+                ->rules(['nullable', 'max:255']),
         ];
     }
 
-    /**
-     * Rows with an existing NIP update that record instead of creating a duplicate.
-     */
     public function resolveRecord(): Staff
     {
-        $nip = $this->data['nip'] ?? null;
+        return new Staff;
+    }
 
-        return filled($nip) ? Staff::firstOrNew(['nip' => $nip]) : new Staff;
+    /**
+     * Blank CSV cells arrive as empty strings, which fail `nullable` checks; treat them as null.
+     */
+    public function castData(): void
+    {
+        parent::castData();
+
+        $this->data = array_map(fn (mixed $value): mixed => $value === '' ? null : $value, $this->data);
     }
 
     public static function getCompletedNotificationBody(Import $import): string
